@@ -1,0 +1,12 @@
+dk/gov/nemlogin/signing/xades/service/XmlSigningPayloadTest.class
+dk/gov/nemlogin/signing/SigningPayloadServiceTest.class
+dk/gov/nemlogin/signing/spring/SpringBootSigningTest.class
+dk/gov/nemlogin/signing/pdf/service/PdfSignatureParameterSigningServiceTest.class
+dk/gov/nemlogin/signing/pdf/transformation/PdfTransformationPropertiesTest.class
+dk/gov/nemlogin/signing/pdf/transformation/PdfTransformationPropertiesTest$1.class
+dk/gov/nemlogin/signing/xades/service/XmlSignatureParameterSigningServiceTest.class
+dk/gov/nemlogin/signing/AbstractSigningTest$1.class
+dk/gov/nemlogin/signing/pdf/service/PdfSigningPayloadTest.class
+dk/gov/nemlogin/signing/pdf/service/PdfValidationTest.class
+dk/gov/nemlogin/signing/AbstractSigningTest.class
+dk/gov/nemlogin/signing/model/SignatureParametersTest.class

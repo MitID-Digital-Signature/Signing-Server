@@ -1,0 +1,14 @@
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/utils/SamlUtils.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/config/BrokerSigningProperties.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/controller/BrokerIdpSamlController.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/service/BrokerIdpSamlService.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/controller/DocumentSigningController.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/NemLogInBrokerMockApplication.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/service/SignersDocumentService.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/config/BrokerSigningConfiguration.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/model/OIOSAMLAttribute.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/config/SamlProperties.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/controller/SigningApiProxyController.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/model/JsonPayload.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/service/DocumentSigningService.java
+/home/nyrup/signering/examples/nemlogin-broker-mock/src/main/java/dk/gov/nemlogin/signing/broker/config/HttpServerConfig.java

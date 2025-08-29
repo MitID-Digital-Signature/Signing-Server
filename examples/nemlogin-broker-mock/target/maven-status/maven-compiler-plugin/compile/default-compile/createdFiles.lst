@@ -1,0 +1,15 @@
+dk/gov/nemlogin/signing/broker/controller/BrokerIdpSamlController.class
+dk/gov/nemlogin/signing/broker/model/JsonPayload.class
+dk/gov/nemlogin/signing/broker/model/OIOSAMLAttribute.class
+dk/gov/nemlogin/signing/broker/config/SamlProperties.class
+dk/gov/nemlogin/signing/broker/service/BrokerIdpSamlService.class
+dk/gov/nemlogin/signing/broker/service/DocumentSigningService.class
+dk/gov/nemlogin/signing/broker/utils/SamlUtils.class
+dk/gov/nemlogin/signing/broker/config/HttpServerConfig.class
+dk/gov/nemlogin/signing/broker/NemLogInBrokerMockApplication.class
+dk/gov/nemlogin/signing/broker/controller/DocumentSigningController.class
+dk/gov/nemlogin/signing/broker/config/BrokerSigningConfiguration.class
+META-INF/spring-configuration-metadata.json
+dk/gov/nemlogin/signing/broker/config/BrokerSigningProperties.class
+dk/gov/nemlogin/signing/broker/service/SignersDocumentService.class
+dk/gov/nemlogin/signing/broker/controller/SigningApiProxyController.class

@@ -1,0 +1,10 @@
+/home/nyrup/signering/test/nemlogin-signing-test/src/test/java/dk/gov/nemlogin/signing/xades/service/XmlSignatureParameterSigningServiceTest.java
+/home/nyrup/signering/test/nemlogin-signing-test/src/test/java/dk/gov/nemlogin/signing/pdf/transformation/PdfTransformationPropertiesTest.java
+/home/nyrup/signering/test/nemlogin-signing-test/src/test/java/dk/gov/nemlogin/signing/xades/service/XmlSigningPayloadTest.java
+/home/nyrup/signering/test/nemlogin-signing-test/src/test/java/dk/gov/nemlogin/signing/pdf/service/PdfValidationTest.java
+/home/nyrup/signering/test/nemlogin-signing-test/src/test/java/dk/gov/nemlogin/signing/model/SignatureParametersTest.java
+/home/nyrup/signering/test/nemlogin-signing-test/src/test/java/dk/gov/nemlogin/signing/spring/SpringBootSigningTest.java
+/home/nyrup/signering/test/nemlogin-signing-test/src/test/java/dk/gov/nemlogin/signing/pdf/service/PdfSigningPayloadTest.java
+/home/nyrup/signering/test/nemlogin-signing-test/src/test/java/dk/gov/nemlogin/signing/pdf/service/PdfSignatureParameterSigningServiceTest.java
+/home/nyrup/signering/test/nemlogin-signing-test/src/test/java/dk/gov/nemlogin/signing/AbstractSigningTest.java
+/home/nyrup/signering/test/nemlogin-signing-test/src/test/java/dk/gov/nemlogin/signing/SigningPayloadServiceTest.java

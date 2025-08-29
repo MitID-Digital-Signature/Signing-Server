@@ -1,0 +1,8 @@
+/home/nyrup/signering/library/nemlogin-signing-pdf-validator/src/main/java/dk/gov/nemlogin/signing/pdf/validation/PdfValidationService.java
+/home/nyrup/signering/library/nemlogin-signing-pdf-validator/src/main/java/dk/gov/nemlogin/signing/pdf/validation/Main.java
+/home/nyrup/signering/library/nemlogin-signing-pdf-validator/src/main/java/dk/gov/nemlogin/signing/pdf/validation/PdfWhitelistValidator.java
+/home/nyrup/signering/library/nemlogin-signing-pdf-validator/src/main/java/dk/gov/nemlogin/signing/pdf/validation/PdfFontValidator.java
+/home/nyrup/signering/library/nemlogin-signing-pdf-validator/src/main/java/dk/gov/nemlogin/signing/pdf/validation/PdfValidationResult.java
+/home/nyrup/signering/library/nemlogin-signing-pdf-validator/src/main/java/dk/gov/nemlogin/signing/pdf/validation/PdfFontDescriptor.java
+/home/nyrup/signering/library/nemlogin-signing-pdf-validator/src/main/java/dk/gov/nemlogin/signing/pdf/validation/ValidationPdfParser.java
+/home/nyrup/signering/library/nemlogin-signing-pdf-validator/src/main/java/dk/gov/nemlogin/signing/pdf/validation/WhiteList.java

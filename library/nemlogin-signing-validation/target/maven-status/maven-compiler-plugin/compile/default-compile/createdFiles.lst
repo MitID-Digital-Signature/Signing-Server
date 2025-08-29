@@ -1,0 +1,11 @@
+dk/gov/nemlogin/signing/validation/model/ValidationSignature$SignatureFormat.class
+dk/gov/nemlogin/signing/validation/model/ValidationSignature.class
+dk/gov/nemlogin/signing/validation/model/ValidationReport.class
+dk/gov/nemlogin/signing/validation/service/SignatureValidationService.class
+dk/gov/nemlogin/signing/validation/model/ValidationResult.class
+dk/gov/nemlogin/signing/validation/model/ValidationSignature$SubIndication.class
+dk/gov/nemlogin/signing/validation/model/SignatureValidationContext.class
+dk/gov/nemlogin/signing/validation/model/ValidationSignature$SignatureLevel.class
+dk/gov/nemlogin/signing/validation/model/ValidationCertificate.class
+dk/gov/nemlogin/signing/validation/model/ValidationSignature$Indication.class
+dk/gov/nemlogin/signing/validation/model/SignatureValidationContext$Builder.class

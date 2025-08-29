@@ -1,0 +1,30 @@
+# OS/Editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Logs & temp
+logs/
+*.log
+tmp/
+.cache/
+
+# Miljøfiler – track IKKE disse
+.env
+.env.*
+*.key
+*.pem
+*.p12
+
+# Java app configfiler
+examples/nemlogin-signing-webapp/src/main/resources/application.yaml
+examples/nemlogin-signing-webapp/target/classes/application.yaml
+
+# Sprogafhængigt – fjern hvad der ikke passer:
+node_modules/
+vendor/
+dist/
+build/
+coverage/

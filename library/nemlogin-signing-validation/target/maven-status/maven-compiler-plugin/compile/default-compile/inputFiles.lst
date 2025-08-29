@@ -1,0 +1,6 @@
+/home/nyrup/signering/library/nemlogin-signing-validation/src/main/java/dk/gov/nemlogin/signing/validation/model/ValidationSignature.java
+/home/nyrup/signering/library/nemlogin-signing-validation/src/main/java/dk/gov/nemlogin/signing/validation/model/ValidationCertificate.java
+/home/nyrup/signering/library/nemlogin-signing-validation/src/main/java/dk/gov/nemlogin/signing/validation/model/ValidationReport.java
+/home/nyrup/signering/library/nemlogin-signing-validation/src/main/java/dk/gov/nemlogin/signing/validation/model/SignatureValidationContext.java
+/home/nyrup/signering/library/nemlogin-signing-validation/src/main/java/dk/gov/nemlogin/signing/validation/service/SignatureValidationService.java
+/home/nyrup/signering/library/nemlogin-signing-validation/src/main/java/dk/gov/nemlogin/signing/validation/model/ValidationResult.java

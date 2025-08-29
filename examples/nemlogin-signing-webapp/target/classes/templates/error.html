@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="fragments/layout :: headFragment"></head>
+  <body>
+    <div>
+      <div class="container page-layout">
+        <div th:replace="fragments/layout :: headerFragment"></div>
+
+        <div class="page-content">
+
+          <div class="mb-3">
+            <span style="float: right">
+              <a href="/" class="btn btn-secondary" th:text="#{back}" id="back"></a>
+            </span>
+            <h2 th:text="#{app_error.title}"></h2>
+          </div>
+
+          <div class="overflow-hidden">
+            <table class="table mt-4">
+              <tr>
+                <th th:text="#{app_error.error.date}"></th>
+                <td th:text="${timestamp}"/>
+              </tr>
+              <tr>
+                <th th:text="#{app_error.error.path}"></th>
+                <td th:text="${path}"/>
+              </tr>
+              <tr>
+                <th th:text="#{app_error.error.error}"></th>
+                <td th:text="${error}"/>
+              </tr>
+              <tr>
+                <th th:text="#{app_error.error.status}"></th>
+                <td th:text="${status}"/>
+              </tr>
+              <tr>
+                <th th:text="#{app_error.error.message}"></th>
+                <td th:text="${message}"/>
+              </tr>
+              <tr>
+                <th th:text="#{app_error.error.trace}"></th>
+                <td>
+                  <pre th:text="${trace}"/>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+
+        <div th:replace="fragments/layout :: footerFragment"></div>
+      </div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+dk.gov.nemlogin.signing.service.impl.Pdf2PdfFormatTransformationService
+dk.gov.nemlogin.signing.service.impl.Txt2PdfFormatTransformationService
+dk.gov.nemlogin.signing.service.impl.Xml2PdfFormatTransformationService

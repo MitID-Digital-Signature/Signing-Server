@@ -1,0 +1,52 @@
+{
+  "groups": [
+    {
+      "name": "nemlogin.signing.broker",
+      "type": "dk.gov.nemlogin.signing.broker.config.BrokerSigningProperties",
+      "sourceType": "dk.gov.nemlogin.signing.broker.config.BrokerSigningProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "nemlogin.signing.broker.entity-id",
+      "type": "java.lang.String",
+      "sourceType": "dk.gov.nemlogin.signing.broker.config.BrokerSigningProperties"
+    },
+    {
+      "name": "nemlogin.signing.broker.key-pair-alias",
+      "type": "java.lang.String",
+      "sourceType": "dk.gov.nemlogin.signing.broker.config.BrokerSigningProperties"
+    },
+    {
+      "name": "nemlogin.signing.broker.keystore-class-path",
+      "type": "java.lang.String",
+      "sourceType": "dk.gov.nemlogin.signing.broker.config.BrokerSigningProperties"
+    },
+    {
+      "name": "nemlogin.signing.broker.keystore-password",
+      "type": "java.lang.String",
+      "sourceType": "dk.gov.nemlogin.signing.broker.config.BrokerSigningProperties"
+    },
+    {
+      "name": "nemlogin.signing.broker.keystore-type",
+      "type": "java.lang.String",
+      "sourceType": "dk.gov.nemlogin.signing.broker.config.BrokerSigningProperties"
+    },
+    {
+      "name": "nemlogin.signing.broker.private-key-password",
+      "type": "java.lang.String",
+      "sourceType": "dk.gov.nemlogin.signing.broker.config.BrokerSigningProperties"
+    },
+    {
+      "name": "nemlogin.signing.broker.saml",
+      "type": "dk.gov.nemlogin.signing.broker.config.SamlProperties",
+      "sourceType": "dk.gov.nemlogin.signing.broker.config.BrokerSigningProperties"
+    },
+    {
+      "name": "nemlogin.signing.broker.signing-api-url",
+      "type": "java.lang.String",
+      "sourceType": "dk.gov.nemlogin.signing.broker.config.BrokerSigningProperties"
+    }
+  ],
+  "hints": []
+}
