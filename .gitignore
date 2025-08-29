@@ -4,6 +4,7 @@ Thumbs.db
 *.swp
 .vscode/
 .idea/
+._*
 
 # Logs & temp
 logs/
@@ -22,9 +23,3 @@ tmp/
 examples/nemlogin-signing-webapp/src/main/resources/application.yaml
 examples/nemlogin-signing-webapp/target/classes/application.yaml
 
-# Sprogafhængigt – fjern hvad der ikke passer:
-node_modules/
-vendor/
-dist/
-build/
-coverage/

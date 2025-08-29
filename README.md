@@ -63,8 +63,10 @@ You also need to copy the MitID p12 certificate into each folder. P12 files have
 * examples/nemlogin-signing-webapp/src/main/resources/default.application.yaml
 * examples/nemlogin-signing-webapp/target/classes/default.application.yaml
 
+An example vhost file is included in ./example.vhost.com - it is made for nginx
 ## Prerequisite
 
+* Nginx
 * Java 11+ 
 * Maven
 
