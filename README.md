@@ -78,6 +78,9 @@ You also need to copy the MitID p12 certificate into each folder. P12 files have
 
 Access webapp on http://localhost:8080
 
+# start.sh script
+If you would like to use the start.sh script edit it and thange the foldername to where your github root is. 
+
 ## Changelog
 
 ### Version 1.0.4
