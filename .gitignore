@@ -19,6 +19,9 @@ tmp/
 *.pem
 *.p12
 
+# Maven target folders ignore
+**/target/
+
 # Allow the test certificate to be added to git
 !test/nemlogin-signing-test/src/test/resources/TU-Test.p12
 
