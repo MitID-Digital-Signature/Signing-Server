@@ -61,7 +61,7 @@ These config files need to be copiet to their names without "default.". Ex. appl
 You also need to copy the MitID p12 certificate into each folder. P12 files have been added to the .gitignore as well as the 2 yaml files
 
 * examples/nemlogin-signing-webapp/src/main/resources/default.application.yaml
-* examples/nemlogin-signing-webapp/target/classes/default.application.yaml
+* examples/nemlogin-signing-webapp/target/classes/application.yaml (this will be created when running mvn clean install)
 
 An example vhost file is included in ./example.vhost.com - it is made for nginx
 ## Prerequisite
