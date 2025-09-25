@@ -1,8 +1,0 @@
-dk/gov/nemlogin/signing/pdf/validation/PdfWhitelistValidator.class
-dk/gov/nemlogin/signing/pdf/validation/WhiteList.class
-dk/gov/nemlogin/signing/pdf/validation/PdfValidationResult.class
-dk/gov/nemlogin/signing/pdf/validation/PdfFontDescriptor.class
-dk/gov/nemlogin/signing/pdf/validation/ValidationPdfParser.class
-dk/gov/nemlogin/signing/pdf/validation/Main.class
-dk/gov/nemlogin/signing/pdf/validation/PdfValidationService.class
-dk/gov/nemlogin/signing/pdf/validation/PdfFontValidator.class
