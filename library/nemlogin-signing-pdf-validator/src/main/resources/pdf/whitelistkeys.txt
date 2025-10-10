@@ -1,0 +1,17 @@
+/Encoding
+/ExtGState
+/ColorSpace
+/Pattern
+/Shading
+/XObject
+/ProcSet
+/Properties
+/BaseFont
+/Name
+/Dests
+/Dest
+/Info
+/Font
+/Differences
+/FontName
+/CharProcs

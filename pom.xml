@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>dk.gov.nemlogin</groupId>
+    <artifactId>nemlogin-sign-sdk-java</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.17</version>
+    <name>NemLog-In SP Java SDK Parent POM</name>
+    <url>http://certifikat.gov.dk</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <slf4j-api.version>1.7.30</slf4j-api.version>
+        <junit-jupiter.version>5.7.2</junit-jupiter.version>
+        <bouncy.castle.version>1.69</bouncy.castle.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15on</artifactId>
+                <version>${bouncy.castle.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15on</artifactId>
+                <version>${bouncy.castle.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-jdk14</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M3</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <modules>
+        <module>library/nemlogin-signing-core</module>
+        <module>library/nemlogin-signing-jws</module>
+        <module>library/nemlogin-signing-pades</module>
+        <module>library/nemlogin-signing-xades</module>
+        <module>library/nemlogin-signing-pdf-generator</module>
+        <module>library/nemlogin-signing-pdf-validator</module>
+        <module>library/nemlogin-signing-html-validator</module>
+        <module>library/nemlogin-signing-validation</module>
+        <module>library/nemlogin-signing-spring-boot</module>
+        <module>examples/nemlogin-signing-webapp</module>
+        <module>examples/nemlogin-broker-mock</module>
+        <module>test/nemlogin-signing-test</module>
+    </modules>
+
+</project>

@@ -1,0 +1,225 @@
+<map xmlns="http://www.w3.org/2005/xpath-functions">
+   <map key="poet">
+      <string key="id">heibergjl</string>
+      <string key="country">dk</string>
+      <string key="lang">da</string>
+      <string key="type">poet</string>
+      <string key="square_portrait">social/heibergjl.jpg</string>
+      <map key="name">
+         <string key="firstname">Johan Ludvig</string>
+         <string key="lastname">Heiberg</string>
+         <null key="fullname"/>
+         <null key="pseudonym"/>
+         <null key="christened"/>
+         <null key="realname"/>
+         <null key="sortname"/>
+      </map>
+      <map key="period">
+         <map key="born">
+            <string key="date">1791-12-14</string>
+            <string key="place">København</string>
+            <string key="inon">in</string>
+         </map>
+         <map key="dead">
+            <string key="date">1860-08-25</string>
+            <string key="place">Bonderup ved Ringsted</string>
+            <string key="inon">in</string>
+         </map>
+      </map>
+      <boolean key="has_portraits">true</boolean>
+      <boolean key="has_square_portrait">true</boolean>
+      <boolean key="has_mentions">true</boolean>
+      <boolean key="has_works">true</boolean>
+      <boolean key="has_poems">true</boolean>
+      <boolean key="has_prose">true</boolean>
+      <boolean key="has_texts">true</boolean>
+      <boolean key="has_artwork">false</boolean>
+      <boolean key="has_biography">true</boolean>
+   </map>
+   <map key="work">
+      <string key="id">drama</string>
+      <string key="title">Digte fra dramatiske værker</string>
+      <null key="subtitles"/>
+      <map key="toctitle">
+         <string key="title">Digte fra dramatiske værker</string>
+      </map>
+      <string key="linktitle">Digte fra dramatiske værker</string>
+      <string key="breadcrumbtitle">Digte fra dramatiske værker</string>
+      <string key="year">?</string>
+      <string key="status">incomplete</string>
+      <string key="type">poetry</string>
+      <boolean key="has_content">true</boolean>
+      <string key="published">?</string>
+      <map key="sources"/>
+   </map>
+   <map key="prev">
+      <string key="id">heibergjl2001120601</string>
+      <string key="title">Herligt, en Sommernat</string>
+   </map>
+   <map key="next">
+      <string key="id">heiberg2002011314</string>
+      <string key="title">Naar Aftenglands og Morgenrøde</string>
+   </map>
+   <array key="section_titles">
+      <map>
+         <string key="title">Prindsesse Isabella (1829)</string>
+         <null key="id"/>
+      </map>
+   </array>
+   <map key="text">
+      <string key="id">heiberg2002011324</string>
+      <string key="title">Barcarole</string>
+      <string key="linktitle">Barcarole</string>
+      <null key="subtitles"/>
+      <null key="suptitles"/>
+      <boolean key="is_prose">false</boolean>
+      <string key="text_type">poem</string>
+      <boolean key="has_footnotes">false</boolean>
+      <array key="notes">
+         <map>
+            <string key="type">credits</string>
+            <string key="content_lang">da</string>
+            <array key="content_html">
+               <array>
+                  <string>Bidrag fra Svend Andersen.</string>
+               </array>
+            </array>
+         </map>
+         <map>
+            <null key="type"/>
+            <string key="content_lang">da</string>
+            <array key="content_html">
+               <array>
+                  <string>Kilde er J. L. Heiberg: &lt;i&gt;Udvalgte Digte&lt;/i&gt;, Otto Borchsenius (red.), Gyldendalske Boghandels Forlag, Reitzelske Afdeling, Kjøbenhavn, 1897.</string>
+                  <map>
+                     <boolean key="html">true</boolean>
+                  </map>
+               </array>
+            </array>
+         </map>
+      </array>
+      <null key="source"/>
+      <array key="keywords"/>
+      <array key="refs">
+         <array>
+            <array>
+               <string>Thor Lange: &lt;a poem="lange2019101408"&gt;»Havet«&lt;/a&gt; - Fra fremmede Lande (1876)</string>
+               <map>
+                  <boolean key="html">true</boolean>
+               </map>
+            </array>
+         </array>
+      </array>
+      <array key="variants"/>
+      <array key="pictures"/>
+      <string key="content_lang">da</string>
+      <array key="content_html">
+         <array>
+            <string>Lette Bølge! Naar du blaaner,</string>
+            <map>
+               <number key="num">1</number>
+            </map>
+         </array>
+         <array>
+            <string>Gjennemsigtig, lys og klar,</string>
+            <map>
+               <number key="num">2</number>
+            </map>
+         </array>
+         <array>
+            <string>Himlens Farveskjær du laaner,</string>
+            <map>
+               <number key="num">3</number>
+            </map>
+         </array>
+         <array>
+            <string>Selv du ingen Farve har.</string>
+            <map>
+               <number key="num">4</number>
+            </map>
+         </array>
+         <array>
+            <string>Himlen ei, kun Himlens Billed</string>
+            <map>
+               <number key="num">5</number>
+               <number key="displayNum">5</number>
+            </map>
+         </array>
+         <array>
+            <string>Hviler i din dybe Favn;</string>
+            <map>
+               <number key="num">6</number>
+            </map>
+         </array>
+         <array>
+            <string>Aldrig er din Længsel stillet,</string>
+            <map>
+               <number key="num">7</number>
+            </map>
+         </array>
+         <array>
+            <string>Den er evig, som dit Savn.</string>
+            <map>
+               <number key="num">8</number>
+            </map>
+         </array>
+         <array>
+            <string/>
+         </array>
+         <array>
+            <string>Bølge! Hvor du klarest rinder,</string>
+            <map>
+               <number key="num">9</number>
+            </map>
+         </array>
+         <array>
+            <string>Speiles Himlen i dit Bad;</string>
+            <map>
+               <number key="num">10</number>
+               <number key="displayNum">10</number>
+            </map>
+         </array>
+         <array>
+            <string>Ak! din Længsel Hjertet minder</string>
+            <map>
+               <number key="num">11</number>
+            </map>
+         </array>
+         <array>
+            <string>Om hvad Skjæbnen skiller ad.</string>
+            <map>
+               <number key="num">12</number>
+            </map>
+         </array>
+         <array>
+            <string>Hjerte! Du bør ikke klage!</string>
+            <map>
+               <number key="num">13</number>
+            </map>
+         </array>
+         <array>
+            <string>Selv Naturen føler Savn;</string>
+            <map>
+               <number key="num">14</number>
+            </map>
+         </array>
+         <array>
+            <string>Trøst dig, hvis du har tilbage</string>
+            <map>
+               <number key="num">15</number>
+               <number key="displayNum">15</number>
+            </map>
+         </array>
+         <array>
+            <string>Kun et Billed og et Navn.</string>
+            <map>
+               <number key="num">16</number>
+            </map>
+         </array>
+         <array>
+            <string/>
+         </array>
+      </array>
+      <null key="toc"/>
+   </map>
+</map>

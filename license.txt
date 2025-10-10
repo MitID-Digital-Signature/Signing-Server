@@ -1,0 +1,20 @@
+NemLog-In SignSDK Software License
+==================================
+
+EN:
+
+This software is controlled by the Danish Agency for Digitisation (www.digst.dk).
+For details on licensing and usage limitations please contact digst@digst.dk
+indicating that the subject is "NemLog-in Software License".
+
+Danish Agency for Digitisation.
+
+----------
+
+DA:
+
+Denne softwaren er styret af Digitaliseringsstyrelsen (www.digst.dk).
+Spørgsmål vedrørende licens og anvendelsesbegrænsninger skal stilles til digst@digst.dk
+med angivelse af emnet "NemLog-in software licens".
+
+Digitaliseringsstyrelsen.

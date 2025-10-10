@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>dk.gov.nemlogin</groupId>
+        <artifactId>nemlogin-sign-sdk-java</artifactId>
+        <version>1.0.17</version>
+		<relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>nemlogin-signing-validation</artifactId>
+    <packaging>jar</packaging>
+    <name>NemLog-In SP Java SDK Signature Validation Library</name>
+
+    <properties>
+        <httpcomponents.version>4.5.13</httpcomponents.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>dk.gov.nemlogin</groupId>
+            <artifactId>nemlogin-signing-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpcomponents.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>${httpcomponents.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.17.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.17.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.0</version>
+        </dependency>
+    </dependencies>
+</project>
