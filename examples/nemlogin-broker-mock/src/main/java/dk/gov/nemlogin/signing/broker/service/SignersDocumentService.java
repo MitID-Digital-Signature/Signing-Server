@@ -154,7 +154,7 @@ public class SignersDocumentService {
      */
     private SignersDocumentFile getXslt(String fileName) throws IOException {
 
-        String xsltFileName = SigningUtils.fileName(fileName,"xsl");
+        String xsltFileName = SigningUtils.fileName(fileName, "xsl");
         Resource xslt = resource(xsltFileName);
         try {
             return SignersDocumentFile.builder()
