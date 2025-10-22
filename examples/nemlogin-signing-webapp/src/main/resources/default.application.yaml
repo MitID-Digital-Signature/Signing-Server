@@ -1,0 +1,33 @@
+
+# Note about max post size:
+# The size limit of the original Signer's Document is 20MB. However, if you e.g. sign a XAdES based on a PDF,
+# then the signed document received by this app from the Signing Client via a window.postMessage(), will be a
+# Base64-encoded XML containing a Base-64-encoded PDF.
+# Hence, we pick a larger max post size of 40MB.
+
+spring:
+    servlet:
+        multipart:
+            enabled: true
+            max-file-size: 50MB
+            max-request-size: 50MB
+
+server:
+    tomcat:
+        max-http-form-post-size: 500000000
+        max-swallow-size: 500000000
+        connection-timeout: 300000
+    error:
+        include-stacktrace: always
+    shutdown: graceful
+    port: 8088
+
+nemlogin:
+  signing:
+      signing-client-url: https://underskrift.nemlog-in.dk/
+      validation-service-url: https://validering.nemlog-in.dk/api/validate
+      entity-id: [your saml metadata url from the nemlogin admin setup]
+      keystore-class-path: [your nemlogin p12 filename - uses the same folder as this settings file] 
+      key-pair-alias: ["The name of your certificate"]
+      keystore-password: [cert password] 
+      private-key-password: [cert password]

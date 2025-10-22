@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>dk.gov.nemlogin</groupId>
+        <artifactId>nemlogin-sign-sdk-java</artifactId>
+        <version>1.0.17</version>
+        <relativePath>../..</relativePath>
+    </parent>
+
+    <artifactId>nemlogin-signing-test</artifactId>
+    <packaging>jar</packaging>
+    <name>NemLog-In SP Java SDK Tests</name>
+
+    <properties>
+        <spring-boot.version>2.7.11</spring-boot.version>
+        <saxon.version>9.9.1-6</saxon.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>dk.gov.nemlogin</groupId>
+            <artifactId>nemlogin-signing-spring-boot</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dk.gov.nemlogin</groupId>
+            <artifactId>nemlogin-signing-jws</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dk.gov.nemlogin</groupId>
+            <artifactId>nemlogin-signing-pdf-validator</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dk.gov.nemlogin</groupId>
+            <artifactId>nemlogin-signing-pdf-generator</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dk.gov.nemlogin</groupId>
+            <artifactId>nemlogin-signing-xades</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dk.gov.nemlogin</groupId>
+            <artifactId>nemlogin-signing-pades</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>dk.gov.nemlogin</groupId>
+            <artifactId>nemlogin-signing-html-validator</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Used for generating test data -->
+        <dependency>
+            <groupId>net.sf.saxon</groupId>
+            <artifactId>Saxon-HE</artifactId>
+            <version>${saxon.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- TEST -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring-boot.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

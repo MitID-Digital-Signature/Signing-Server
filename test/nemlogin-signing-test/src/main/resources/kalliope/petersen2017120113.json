@@ -1,0 +1,216 @@
+{
+  "poet": {
+    "id": "petersen",
+    "country": "dk",
+    "lang": "da",
+    "type": "poet",
+    "square_portrait": "social/petersen.jpg",
+    "name": {
+      "firstname": "Nis",
+      "lastname": "Petersen",
+      "fullname": null,
+      "pseudonym": null,
+      "christened": null,
+      "realname": null,
+      "sortname": null
+    },
+    "period": {
+      "born": {
+        "date": "1897-01-22",
+        "place": "Vamdrup",
+        "inon": "in"
+      },
+      "dead": {
+        "date": "1943-03-09",
+        "place": null,
+        "inon": "in"
+      }
+    },
+    "has_portraits": true,
+    "has_square_portrait": true,
+    "has_mentions": false,
+    "has_works": true,
+    "has_poems": true,
+    "has_prose": true,
+    "has_texts": true,
+    "has_artwork": false,
+    "has_biography": true
+  },
+  "work": {
+    "id": "1926",
+    "title": "Nattens pibere",
+    "subtitles": null,
+    "toctitle": {
+      "title": "Nattens pibere"
+    },
+    "linktitle": "Nattens pibere",
+    "breadcrumbtitle": "Nattens pibere",
+    "year": "1926",
+    "status": "complete",
+    "type": "poetry",
+    "has_content": true,
+    "published": "1926",
+    "sources": {
+      "default": {
+        "source": "Nis Petersen: <i>Nattens Pibere</i>, Gyldendalske Boghandel, Kbh., 1926.",
+        "facsimile": "115308086074_color",
+        "facsimilePageCount": 84,
+        "facsimilePagesOffset": 6
+      }
+    }
+  },
+  "prev": {
+    "id": "petersen2017120112",
+    "title": "Støv"
+  },
+  "next": {
+    "id": "petersen2017120114",
+    "title": "Tøvejr"
+  },
+  "section_titles": [
+    {
+      "title": "III.",
+      "id": null
+    }
+  ],
+  "text": {
+    "id": "petersen2017120113",
+    "title": "Når kirsebærtræerne blomstrer",
+    "linktitle": "Når kirsebærtræerne blomstrer",
+    "subtitles": null,
+    "suptitles": null,
+    "is_prose": false,
+    "text_type": "poem",
+    "has_footnotes": false,
+    "notes": [],
+    "source": {
+      "source": "Nis Petersen: <i>Nattens Pibere</i>, Gyldendalske Boghandel, Kbh., 1926.",
+      "pages": "36-37",
+      "facsimilePageCount": 84,
+      "facsimile": "115308086074_color",
+      "facsimilePages": [
+        42,
+        43
+      ]
+    },
+    "keywords": [],
+    "refs": [],
+    "variants": [],
+    "pictures": [],
+    "content_lang": "da",
+    "content_html": [
+      [
+        "Når kirsebærtræerne blomstrer",
+        {
+          "num": 1
+        }
+      ],
+      [
+        "— det gør de i denne stund —",
+        {
+          "num": 2
+        }
+      ],
+      [
+        "er det, som jorden rækker",
+        {
+          "num": 3
+        }
+      ],
+      [
+        "himlen sin blomstermund.",
+        {
+          "num": 4
+        }
+      ],
+      [
+        ""
+      ],
+      [
+        "Når kirsebærtræerne blomstrer",
+        {
+          "num": 5,
+          "displayNum": 5
+        }
+      ],
+      [
+        "— det gør de i denne nat —",
+        {
+          "num": 6
+        }
+      ],
+      [
+        "er det som lys, der brænder",
+        {
+          "num": 7
+        }
+      ],
+      [
+        "over en bortgemt skat.",
+        {
+          "num": 8
+        }
+      ],
+      [
+        ""
+      ],
+      [
+        "Kirsebærtræernes trolddom",
+        {
+          "num": 9
+        }
+      ],
+      [
+        "hvisker bag hver en hæk",
+        {
+          "num": 10,
+          "displayNum": 10
+        }
+      ],
+      [
+        "— den samme lysende sladder,",
+        {
+          "num": 11
+        }
+      ],
+      [
+        "der går i en rislende bæk.",
+        {
+          "num": 12
+        }
+      ],
+      [
+        ""
+      ],
+      [
+        "Og jeg, der gik ud at søge",
+        {
+          "num": 13
+        }
+      ],
+      [
+        "efter en bortgemt skat,",
+        {
+          "num": 14
+        }
+      ],
+      [
+        "glemmer de lys, der brænder,",
+        {
+          "num": 15,
+          "displayNum": 15
+        }
+      ],
+      [
+        "for sladderen i en nat.",
+        {
+          "num": 16
+        }
+      ],
+      [
+        ""
+      ]
+    ],
+    "toc": null
+  }
+}
