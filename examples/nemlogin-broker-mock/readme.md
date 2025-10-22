@@ -12,6 +12,7 @@ into PAdES-B-LTA respectively XAdES-B-LTA are left to the Broker,
 and must follow the specification detailed in the NemLog-In documentation.
 
 ## Documentation
+
 * NL3 Signature SP implementation guidelines
 * NL3 Signature Broker implementation guidelines
 
