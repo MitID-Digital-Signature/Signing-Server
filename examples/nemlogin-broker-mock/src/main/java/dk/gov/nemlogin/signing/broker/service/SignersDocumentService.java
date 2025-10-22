@@ -148,7 +148,7 @@ public class SignersDocumentService {
 
     /**
      * For XML files, there must be a corresponding XSLT file with the same file name but
-     * or ".xslt" file extension
+     * ".xslt" file extension
      * @param fileName the XML file name
      * @return the associated XSLT
      */
