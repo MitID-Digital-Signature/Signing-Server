@@ -4,7 +4,7 @@
  * Disclaimer:
  * This code is not production code. It's purpose is to illustrate for the Broker how
  * to call the NemLog-In Signing API.<br>
- * PLease refer to "NL3 Signature SP implementation guidelines" and "NL3 Signature Broker implementation guidelines"
+ * Please refer to "NL3 Signature SP implementation guidelines" and "NL3 Signature Broker implementation guidelines"
  * for details about formats and APIs.
  */
 
