@@ -57,7 +57,7 @@ which demonstrates how to use the SignSDK library.
 | nemlogin-broker-mock             | Example Broker mock web application written in Spring Boot. The module should be disregarded by Service Providers. |
 
 ## Config files 
-These config files need to be copiet to their names without "default.". Ex. application.yaml. And filed out with nemlog-in data
+These config files need to be copied to their names without "default.", e.g. `application.yaml`, and filed out with nemlog-in data.
 You also need to copy the MitID p12 certificate into each folder. P12 files have been added to the .gitignore as well as the 2 yaml files
 
 * examples/nemlogin-signing-webapp/src/main/resources/default.application.yaml
