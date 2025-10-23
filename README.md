@@ -2,6 +2,8 @@
 
 This project is the official NemLog-In Signing SDK Java implementation for Service Providers and Brokers.
 
+To use this backend component, you also have to set up the frontend module (https://github.com/MitID-Digital-Signature/os2forms_dig_sig_server/) and the client module in OS2forms (https://github.com/OS2Forms/os2forms/tree/develop/modules/os2forms_digital_signature).
+
 # Documentation
 
 The documentation for using NemLog-In Java SignSDK, along with additional relevant documentation, is found at:
