@@ -7,7 +7,7 @@ To use this backend component, you also have to set up the frontend module (http
 # Documentation
 
 The documentation for using NemLog-In Java SignSDK, along with additional relevant documentation, is found at:
-* https://migrering.nemlog-in.dk/nemlog-in-broker/test-og-dokumentation/ 
+* https://tu.nemlog-in.dk/tilslutning/ 
 
 ## Public APIs
 
