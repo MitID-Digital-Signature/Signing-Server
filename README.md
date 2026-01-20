@@ -20,6 +20,33 @@ The example web applications included in the SDK are configured to use the Test 
 | Test Validation API        | https://validering.test-nemlog-in.dk      |
 | Production Validation API  | https://validering.nemlog-in.dk           |
 
+## Certificate
+The certificate is an OCES cert. generated like when you use e.g. Digiatal Post (via MitID erhverv). The public part / pem file has to be uploaded to the nemlogin admin for the server
+
+To generate a cert go to: https://erhvervsadministration.nemlog-in.dk/certificates
+
+You get a p12 file that needs to be added to the configuration file with a path relative to that file. If the p12 file is in the same folder as the config file it would be like below.
+
+### Where to store the certificate
+The config file is in examples/nemlogin-signing-webapp/src/main/resources/
+
+If the cert file is in the same folder the path in the config file is
+
+keystore-class-path: /Certificate_for_Signing_purpose.p12
+
+key-pair-alias: ["The HUMAN READABLE name of your certificate"] (e.g. key-pair-alias: "certificate for signing purpose")
+
+keystore-password: Your p12 certificate password
+
+private-key-password: Your p12 certificate password
+
+### Nemlogin metadata url
+entity-id: [your saml metadata url from the nemlogin admin setup]
+
+E.g. entity-id: https://saml.sign.nemlogin3.bellcom.dk - it is defined in the nemlogin admin setup for your service
+
+![Screenshot](images/NemLog-in-Administration.png)
+
 # SignSDK Library Structure
 
 The SignSDK library has been organized into a set of sub-projects with the aim of reducing 
