@@ -5,7 +5,7 @@
     <parent>
         <groupId>dk.gov.nemlogin</groupId>
         <artifactId>nemlogin-sign-sdk-java</artifactId>
-        <version>1.0.17</version>
+        <version>2.0.2</version>
 		<relativePath>../..</relativePath>
     </parent>
 
@@ -14,7 +14,7 @@
     <name>NemLog-In SP Java SDK Broker Mock</name>
 
     <properties>
-        <spring-boot.version>2.7.11</spring-boot.version>
+        <spring-boot.version>3.2.1</spring-boot.version>
         <opensaml.version>4.0.1</opensaml.version>
         <application.name>sign-sdk-broker</application.name>
     </properties>
@@ -143,6 +143,16 @@
             <groupId>org.opensaml</groupId>
             <artifactId>opensaml-saml-api</artifactId>
             <version>${opensaml.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-collections</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.velocity</groupId>
+                    <artifactId>velocity-engine-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

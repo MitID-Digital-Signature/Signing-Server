@@ -25,7 +25,7 @@ public class SigningConfigurationProperties {
     /**
      * If defined, the generated signed document will be persisted to this folder.
      */
-    private String saveSignedDocumentToFolder = "signed-documents";
+    private String saveSignedDocumentToFolder;
 
 
     public String getSdFolder() {

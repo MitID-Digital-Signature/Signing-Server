@@ -5,7 +5,7 @@
     <parent>
         <groupId>dk.gov.nemlogin</groupId>
         <artifactId>nemlogin-sign-sdk-java</artifactId>
-        <version>1.0.17</version>
+        <version>2.0.2</version>
 		<relativePath>../..</relativePath>
     </parent>
 
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>29.0-jre</version>
+            <version>32.1.2-jre</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
@@ -46,6 +46,12 @@
                  so optional true prevent duplication on the class path.
                  BUT adding this dependency elsewhere will cause problems! -->
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>2.1.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

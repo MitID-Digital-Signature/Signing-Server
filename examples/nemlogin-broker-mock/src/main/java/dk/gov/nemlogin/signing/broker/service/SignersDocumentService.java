@@ -148,13 +148,13 @@ public class SignersDocumentService {
 
     /**
      * For XML files, there must be a corresponding XSLT file with the same file name but
-     * ".xslt" file extension
+     * or ".xslt" file extension
      * @param fileName the XML file name
      * @return the associated XSLT
      */
     private SignersDocumentFile getXslt(String fileName) throws IOException {
 
-        String xsltFileName = SigningUtils.fileName(fileName, "xsl");
+        String xsltFileName = SigningUtils.fileName(fileName,"xsl");
         Resource xslt = resource(xsltFileName);
         try {
             return SignersDocumentFile.builder()

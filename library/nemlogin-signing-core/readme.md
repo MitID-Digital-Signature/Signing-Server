@@ -8,7 +8,7 @@ Always
 
 ## Prerequisite
 
-* Java 11+
+* Java 17
 * Maven
 
 ## Transitive Dependencies and Credits

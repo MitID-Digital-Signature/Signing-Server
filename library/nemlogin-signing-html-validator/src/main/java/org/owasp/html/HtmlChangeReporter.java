@@ -31,7 +31,7 @@ package org.owasp.html;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * Sits between the HTML parser, the policy, and the renderer so that it

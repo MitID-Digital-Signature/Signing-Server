@@ -5,7 +5,7 @@
     <parent>
         <groupId>dk.gov.nemlogin</groupId>
         <artifactId>nemlogin-sign-sdk-java</artifactId>
-        <version>1.0.17</version>
+        <version>2.0.2</version>
 		<relativePath>../..</relativePath>
     </parent>
 
@@ -14,8 +14,8 @@
     <name>NemLog-In SP Java SDK JWS Library</name>
 
     <properties>
-        <nimbus-jose-jwt.version>9.14</nimbus-jose-jwt.version>
-        <json-smart.version>2.4.7</json-smart.version>
+        <nimbus-jose-jwt.version>9.34</nimbus-jose-jwt.version>
+        <json-smart.version>2.4.11</json-smart.version>
     </properties>
 
     <dependencies>
