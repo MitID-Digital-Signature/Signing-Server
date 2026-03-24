@@ -16,13 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 
@@ -162,8 +161,9 @@ public class SignersDocumentController {
     public String resetSignersDocuments(Model model) throws IOException {
         if (signersDocumentService.sdFolderDefined()) {
             try(var stream = Files.walk(signersDocumentService.checkCreateSdFolder())) {
-                stream.filter(Files::isRegularFile).collect(Collectors.toList())
-                    .stream().forEach(x -> x.toFile().delete()) ;
+                stream.filter(Files::isRegularFile)
+                    .toList()
+                    .forEach(x -> x.toFile().delete()) ;
             }
             signersDocumentService.checkCreateSdFolder().toFile().delete();
         }

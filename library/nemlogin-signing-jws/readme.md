@@ -8,7 +8,7 @@ You must always include this dependency, or create your own implementation of th
 
 ## Prerequisite
 
-* Java 11+ 
+* Java 17
 * Maven
 
 ## Transitive Dependencies and Credits

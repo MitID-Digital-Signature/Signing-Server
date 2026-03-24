@@ -4,7 +4,7 @@ Example Spring Boot-based web application, which demonstrates how to integrate t
 
 ## Prerequisite
 
-* Java 11+
+* Java 17
 * Maven
 
 ## Running the Example Webapp

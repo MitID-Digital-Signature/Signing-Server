@@ -13,7 +13,7 @@ import org.w3._2000._09.xmldsig_.ObjectFactory;
 import org.w3._2000._09.xmldsig_.ReferenceType;
 import org.w3._2000._09.xmldsig_.SignatureType;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.UUID;

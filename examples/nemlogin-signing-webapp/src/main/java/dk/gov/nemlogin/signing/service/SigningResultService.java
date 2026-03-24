@@ -60,7 +60,6 @@ public class SigningResultService {
                 LOG.info("Wrote signed document to: {}", filePath);
             } catch (Exception e) {
                 LOG.info("Error writing signed document to: {}", filePath, e);
-		LOG.info("Path is: {}", System.getProperty("user.dir"));
             }
         }
     }
