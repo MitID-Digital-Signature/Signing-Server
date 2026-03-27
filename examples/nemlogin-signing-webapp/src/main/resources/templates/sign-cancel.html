@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments/layout :: headFragment">
-<!--/*@thymesVar id="format" type="String"*/-->
-<!--/*@thymesVar id="name" type="String"*/-->
-<!--/*@thymesVar id="correlationId" type="String"*/-->
-<!--/*@thymesVar id="signedDocumentFilename" type="String"*/-->
-<!--/*@thymesVar id="signedDocument" type="String"*/-->
-<!--/*@thymesVar id="validationReport" type="dk.gov.nemlogin.signing.validation.model.ValidationReport"*/-->
-<!-- <meta http-equiv="refresh" content="0; url=//sign.php?action=return&cid=${newCorrelationId}">-->
-</head>
-<body onload="document.getElementById('link').click()">
-<a id="link" th:href="@{|/sign.php?action=cancel&cid=${newCorrelationId}&file=${name}|}" style="display:none">.</a>
+<head th:include="fragments/layout :: headFragment"></head>
+<body>
+<div>
+  <div class="container page-layout">
+    <div th:replace="fragments/layout :: headerFragment"></div>
+
+    <div class="page-content">
+
+      <div class="mb-3">
+        <span style="float: right">
+          <a href="/" class="btn btn-secondary" th:text="#{back}" id="back"></a>
+        </span>
+        <h2 th:text="#{sign_cancel.title}"></h2>
+      </div>
+
+    </div>
+
+    <div th:replace="fragments/layout :: footerFragment"></div>
+  </div>
+
+</div>
 </body>
 </html>

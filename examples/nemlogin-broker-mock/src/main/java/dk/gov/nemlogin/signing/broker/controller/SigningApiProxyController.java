@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -141,7 +141,7 @@ public class SigningApiProxyController extends HttpServlet {
      * Proxies a request to the Signing API
      **/
     private <T> ResponseEntity<T> proxyRequest(HttpServletRequest request, Class<T> responseClass) throws IOException {
-        return proxyRequest(request.getServletPath(), HttpMethod.resolve(request.getMethod()), toProxyRequest(request), responseClass);
+        return proxyRequest(request.getServletPath(), HttpMethod.valueOf(request.getMethod()), toProxyRequest(request), responseClass);
     }
 
     /**

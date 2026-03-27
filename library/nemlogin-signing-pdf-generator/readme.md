@@ -11,7 +11,7 @@ Alternatively, you could provide your own implementation of the FormatTransforma
 
 ## Prerequisite
 
-* Java 11+ 
+* Java 17
 * Maven
 
 ## Transitive Dependencies and Credits

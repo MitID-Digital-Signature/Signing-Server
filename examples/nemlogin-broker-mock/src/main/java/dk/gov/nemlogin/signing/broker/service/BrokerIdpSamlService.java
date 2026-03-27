@@ -29,7 +29,7 @@ import org.opensaml.xmlsec.signature.support.SignatureException;
 import org.opensaml.xmlsec.signature.support.Signer;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import javax.xml.crypto.dsig.CanonicalizationMethod;
 import java.io.IOException;
 import java.time.LocalDateTime;

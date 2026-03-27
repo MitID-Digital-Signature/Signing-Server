@@ -8,7 +8,7 @@ Only include this dependency if you are integrating SignSDK into a Spring Boot a
 
 ## Prerequisite
 
-* Java 11+ 
+* Java 17
 * Maven
 
 ## Transitive Dependencies and Credits

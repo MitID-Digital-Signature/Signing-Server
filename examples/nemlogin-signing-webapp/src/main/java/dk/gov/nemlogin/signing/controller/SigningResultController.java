@@ -57,6 +57,14 @@ public class SigningResultController {
         Model model) {
 
         LOG.info("Received signing document result: {} for document: {}", type, name);
+        if (RESULT_TYPE_ERROR.equals(type)) {
+            try {
+                String decoded = new String(java.util.Base64.getDecoder().decode(result), java.nio.charset.StandardCharsets.UTF_8);
+                LOG.error("Signing Client Error (decoded): {}", decoded);
+            } catch (Exception e) {
+                LOG.error("Signing Client Error (raw): {}", result);
+            }
+        }
         String signedDocumentFilename = signingResultService.signedDocumentFilename(name, format);
         model.addAttribute(RESULT_NAME, name);
         model.addAttribute(RESULT_SIGNED_DOCUMENT_FILENAME, signedDocumentFilename);

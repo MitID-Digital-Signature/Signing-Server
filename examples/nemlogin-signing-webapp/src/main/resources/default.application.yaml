@@ -31,3 +31,13 @@ nemlogin:
       key-pair-alias: ["The name of your certificate"]
       keystore-password: [cert password] 
       private-key-password: [cert password]
+      webapp:
+          # Defaults in code remain unchanged when this file / path is absent:
+          # sd-folder: file:./signers-documents/
+          # save-dtbs-to-folder: null
+          # save-signed-document-to-folder: signed-documents
+          # Examples: 
+          # sd-folder: file:/var/www/my-drupa-signing-component.com/source/
+          # save-dtbs-to-folder: /var/www/my-drupal-signing-component.com/upload
+          # save-signed-document-to-folder: /var/www/my-drupal-signing-component.com/signed
+

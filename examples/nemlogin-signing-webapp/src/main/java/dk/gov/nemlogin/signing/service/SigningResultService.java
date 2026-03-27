@@ -53,14 +53,17 @@ public class SigningResultService {
     public void checkSaveResult(String name, String format, String document) {
         String saveSignedDocumentToFolder = signingConfigurationProperties.getSaveSignedDocumentToFolder();
         if (SigningUtils.isNotEmpty(saveSignedDocumentToFolder)) {
-            Path filePath = Paths.get(saveSignedDocumentToFolder).resolve(signedDocumentFilename(name, format));
+            Path folder = Paths.get(saveSignedDocumentToFolder);
+            Path filePath = folder.resolve(signedDocumentFilename(name, format));
             byte[] data = Base64.getDecoder().decode(document);
-            try (FileOutputStream fos = new FileOutputStream(filePath.toFile())) {
-                fos.write(data);
-                LOG.info("Wrote signed document to: {}", filePath);
+            try {
+                java.nio.file.Files.createDirectories(folder);
+                try (FileOutputStream fos = new FileOutputStream(filePath.toFile())) {
+                    fos.write(data);
+                    LOG.info("Wrote signed document to: {}", filePath);
+                }
             } catch (Exception e) {
                 LOG.info("Error writing signed document to: {}", filePath, e);
-		LOG.info("Path is: {}", System.getProperty("user.dir"));
             }
         }
     }

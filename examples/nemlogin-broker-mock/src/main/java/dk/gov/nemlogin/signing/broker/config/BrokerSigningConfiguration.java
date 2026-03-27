@@ -2,11 +2,14 @@ package dk.gov.nemlogin.signing.broker.config;
 
 import dk.gov.nemlogin.signing.model.SignatureKeys;
 import dk.gov.nemlogin.signing.service.SigningPayloadService;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.conn.ssl.TrustAllStrategy;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContextBuilder;
+
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactoryBuilder;
+import org.apache.hc.client5.http.ssl.TrustAllStrategy;
+import org.apache.hc.core5.ssl.SSLContextBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -59,9 +62,18 @@ public class BrokerSigningConfiguration {
             SSLContext sslContext = new SSLContextBuilder()
                 .loadTrustMaterial(null, TrustAllStrategy.INSTANCE)
                 .build();
-            httpClientBuilder
-                .setSSLContext(sslContext)
-                .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE);
+
+            httpClientBuilder.setConnectionManager(
+                    PoolingHttpClientConnectionManagerBuilder.create()
+                        .setSSLSocketFactory(
+                            SSLConnectionSocketFactoryBuilder.create()
+                                .setSslContext(sslContext)
+                                .setHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+                                .build()
+                        )
+                        .build()
+                );
+
             HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClientBuilder.build());
             return new RestTemplate(requestFactory);
         } catch (KeyStoreException | NoSuchAlgorithmException | KeyManagementException e) {

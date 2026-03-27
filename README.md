@@ -2,12 +2,10 @@
 
 This project is the official NemLog-In Signing SDK Java implementation for Service Providers and Brokers.
 
-To use this backend component, you also have to set up the frontend module (https://github.com/MitID-Digital-Signature/os2forms_dig_sig_server/) and the client module in OS2forms (https://github.com/OS2Forms/os2forms/tree/develop/modules/os2forms_digital_signature).
-
 # Documentation
 
 The documentation for using NemLog-In Java SignSDK, along with additional relevant documentation, is found at:
-* https://tu.nemlog-in.dk/tilslutning/ 
+* https://migrering.nemlog-in.dk/nemlog-in-broker/test-og-dokumentation/ 
 
 ## Public APIs
 
@@ -58,18 +56,9 @@ which demonstrates how to use the SignSDK library.
 | nemlogin-signing-webapp          | Example Service Provider web application written in Spring Boot. |
 | nemlogin-broker-mock             | Example Broker mock web application written in Spring Boot. The module should be disregarded by Service Providers. |
 
-## Config files 
-These config files need to be copied to their names without "default.", e.g. `application.yaml`, and filed out with nemlog-in data.
-You also need to copy the MitID p12 certificate into each folder. P12 files have been added to the .gitignore as well as the 2 yaml files
-
-* examples/nemlogin-signing-webapp/src/main/resources/default.application.yaml
-* examples/nemlogin-signing-webapp/target/classes/application.yaml (this will be created when running mvn clean install)
-
-An example vhost file is included in ./example.vhost.com - it is made for nginx
 ## Prerequisite
 
-* Nginx
-* Java 11+ 
+* Java 17
 * Maven
 
 # Building
@@ -82,10 +71,30 @@ An example vhost file is included in ./example.vhost.com - it is made for nginx
 
 Access webapp on http://localhost:8080
 
-# start.sh script
-If you would like to use the start.sh script edit it and thange the foldername to where your github root is. 
-
 ## Changelog
+
+### Version 2.0.2
+
+Moved readme.md to README.md
+Changes to start.sh to do shutdown and restart. And work without hardcoded paths. 
+Made changes to not have fixed folders for signed documunents. It can now be set via the appl....
+* examples/nemlogin-signing-webapp/src/main/java/dk/gov/nemlogin/signing/service/DocumentSigningService.java
+* examples/nemlogin-signing-webapp/src/main/java/dk/gov/nemlogin/signing/service/SigningResultService.java
+
+Modifies sign-complete.html to redirect to sign.php as not to break the flow with the drupal modules. 
+* examples/nemlogin-signing-webapp/src/main/resources/templates/sign-complete.html
+
+Added settings for the application settings file for changing folder paths for signing documents. If the settings are not there the defaults are used. 
+* examples/nemlogin-signing-webapp/src/main/resources/default.application.yaml
+
+### Version 2.0.2
+
+Fixed  bug related to wrong .pom file uploaded in version 2.0.1 of the zip
+
+### Version 2.0.1
+
+Updated package Java version from 11.0.2 to jdk : temurin-17.0.9 for Windows and jdk-17.0.9+9 for Mac
+Updated Spring Boot version to 3.2 in example webapps
 
 ### Version 1.0.4
 Updated internal IdP test certificate used by both sample applications from:

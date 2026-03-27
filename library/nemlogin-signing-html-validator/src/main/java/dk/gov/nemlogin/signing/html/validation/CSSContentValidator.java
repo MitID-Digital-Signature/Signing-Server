@@ -1,4 +1,6 @@
 package dk.gov.nemlogin.signing.html.validation;
+
+
 import org.owasp.html.CssGrammar;
 
 import java.util.ArrayList;

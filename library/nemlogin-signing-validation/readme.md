@@ -8,7 +8,7 @@ Only include this dependency if you actually perform signature validation in you
 
 ## Prerequisite
 
-* Java 11+ 
+* Java 17
 * Maven
 
 ## Transitive Dependencies and Credits
@@ -16,7 +16,6 @@ Only include this dependency if you actually perform signature validation in you
 * SignSDK Core Library
   * nemlogin-signing-core + transitive dependencies.
 * Apache HttpClient
-  * Apache httpclient version 4.5.13
-  * Apache httpmime version 4.5.13
+  * Apache httpclient version 5.2.3
 * Jackson
   * jackson-databind version 2.12.0

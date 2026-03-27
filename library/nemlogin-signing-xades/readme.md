@@ -10,7 +10,7 @@ Alternatively, you could provide your own implementation of the SignatureStamper
 
 ## Prerequisite
 
-* Java 11+ 
+* Java 17
 * Maven
 
 ## Transitive Dependencies and Credits
@@ -18,7 +18,7 @@ Alternatively, you could provide your own implementation of the SignatureStamper
 * SignSDK Core Library
   * nemlogin-signing-core + transitive dependencies.
 * Apache Santuario
-  * xmlsec version 2.2.3
+  * xmlsec version 2.3.3
 * JAXB (Only at compile time)
-  * jaxb-api version 2.3.1
-  * jaxb-runtime version 2.3.1
+  * jaxb-api version 4.0.1
+  * jaxb-runtime version 4.0.4
