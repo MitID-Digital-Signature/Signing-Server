@@ -2,12 +2,10 @@
 
 This project is the official NemLog-In Signing SDK Java implementation for Service Providers and Brokers.
 
-To use this backend component, you also have to set up the frontend module (https://github.com/MitID-Digital-Signature/os2forms_dig_sig_server/) and the client module in OS2forms (https://github.com/OS2Forms/os2forms/tree/develop/modules/os2forms_digital_signature).
-
 # Documentation
 
 The documentation for using NemLog-In Java SignSDK, along with additional relevant documentation, is found at:
-* https://tu.nemlog-in.dk/tilslutning/ 
+* https://migrering.nemlog-in.dk/nemlog-in-broker/test-og-dokumentation/ 
 
 ## Public APIs
 
@@ -19,33 +17,6 @@ The example web applications included in the SDK are configured to use the Test 
 | Production Signing API     | https://underskrift.nemlog-in.dk          |
 | Test Validation API        | https://validering.test-nemlog-in.dk      |
 | Production Validation API  | https://validering.nemlog-in.dk           |
-
-## Certificate
-The certificate is an OCES cert. generated like when you use e.g. Digiatal Post (via MitID erhverv). The public part / pem file has to be uploaded to the nemlogin admin for the server
-
-To generate a cert go to: https://erhvervsadministration.nemlog-in.dk/certificates
-
-You get a p12 file that needs to be added to the configuration file with a path relative to that file. If the p12 file is in the same folder as the config file it would be like below.
-
-### Where to store the certificate
-The config file is in examples/nemlogin-signing-webapp/src/main/resources/
-
-If the cert file is in the same folder the path in the config file is
-
-keystore-class-path: /Certificate_for_Signing_purpose.p12
-
-key-pair-alias: ["The HUMAN READABLE name of your certificate"] (e.g. key-pair-alias: "certificate for signing purpose")
-
-keystore-password: Your p12 certificate password
-
-private-key-password: Your p12 certificate password
-
-### Nemlogin metadata url
-entity-id: [your saml metadata url from the nemlogin admin setup]
-
-E.g. entity-id: https://saml.sign.nemlogin3.bellcom.dk - it is defined in the nemlogin admin setup for your service
-
-![Screenshot](images/NemLog-in-Administration.png)
 
 # SignSDK Library Structure
 
@@ -85,18 +56,9 @@ which demonstrates how to use the SignSDK library.
 | nemlogin-signing-webapp          | Example Service Provider web application written in Spring Boot. |
 | nemlogin-broker-mock             | Example Broker mock web application written in Spring Boot. The module should be disregarded by Service Providers. |
 
-## Config files 
-These config files need to be copied to their names without "default.", e.g. `application.yaml`, and filed out with nemlog-in data.
-You also need to copy the MitID p12 certificate into each folder. P12 files have been added to the .gitignore as well as the 2 yaml files
-
-* examples/nemlogin-signing-webapp/src/main/resources/default.application.yaml
-* examples/nemlogin-signing-webapp/target/classes/application.yaml (this will be created when running mvn clean install)
-
-An example vhost file is included in ./example.vhost.com - it is made for nginx
 ## Prerequisite
 
-* Nginx
-* Java 11+ 
+* Java 17
 * Maven
 
 # Building
@@ -109,10 +71,30 @@ An example vhost file is included in ./example.vhost.com - it is made for nginx
 
 Access webapp on http://localhost:8080
 
-# start.sh script
-If you would like to use the start.sh script edit it and thange the foldername to where your github root is. 
-
 ## Changelog
+
+### Version 2.0.2
+
+Moved readme.md to README.md
+Changes to start.sh to do shutdown and restart. And work without hardcoded paths. 
+Made changes to not have fixed folders for signed documunents. It can now be set via the appl....
+* examples/nemlogin-signing-webapp/src/main/java/dk/gov/nemlogin/signing/service/DocumentSigningService.java
+* examples/nemlogin-signing-webapp/src/main/java/dk/gov/nemlogin/signing/service/SigningResultService.java
+
+Modifies sign-complete.html to redirect to sign.php as not to break the flow with the drupal modules. 
+* examples/nemlogin-signing-webapp/src/main/resources/templates/sign-complete.html
+
+Added settings for the application settings file for changing folder paths for signing documents. If the settings are not there the defaults are used. 
+* examples/nemlogin-signing-webapp/src/main/resources/default.application.yaml
+
+### Version 2.0.2
+
+Fixed  bug related to wrong .pom file uploaded in version 2.0.1 of the zip
+
+### Version 2.0.1
+
+Updated package Java version from 11.0.2 to jdk : temurin-17.0.9 for Windows and jdk-17.0.9+9 for Mac
+Updated Spring Boot version to 3.2 in example webapps
 
 ### Version 1.0.4
 Updated internal IdP test certificate used by both sample applications from:

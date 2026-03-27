@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -120,9 +122,13 @@ public class DocumentSigningService {
         String saveDtbsToFolder = signingConfigurationProperties.getSaveDtbsToFolder();
         if (SigningUtils.isNotEmpty(saveDtbsToFolder)) {
             DataToBeSigned dtbs = ctx.getDataToBeSigned();
-            try (FileOutputStream fos = new FileOutputStream(saveDtbsToFolder + "/" + dtbs.getName())) {
-                fos.write(ctx.getDataToBeSigned().getData());
-                LOG.info("Wrote DTBS document to: {}/{}", saveDtbsToFolder, dtbs.getName());
+            Path folder = Path.of(saveDtbsToFolder);
+            try {
+                Files.createDirectories(folder);
+                try (FileOutputStream fos = new FileOutputStream(folder.resolve(dtbs.getName()).toFile())) {
+                    fos.write(ctx.getDataToBeSigned().getData());
+                    LOG.info("Wrote DTBS document to: {}/{}", saveDtbsToFolder, dtbs.getName());
+                }
             } catch (Exception e) {
                 LOG.info("Error writing DTBS document to: {}/{}", saveDtbsToFolder, dtbs.getName(), e);
             }
