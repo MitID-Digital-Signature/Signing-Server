@@ -5,6 +5,8 @@ import dk.gov.nemlogin.signing.broker.config.SamlProperties;
 import dk.gov.nemlogin.signing.broker.model.OIOSAMLAttribute;
 import dk.gov.nemlogin.signing.broker.utils.SamlUtils;
 import dk.gov.nemlogin.signing.model.SignatureKeys;
+import jakarta.annotation.PostConstruct;
+import javax.xml.crypto.dsig.CanonicalizationMethod;
 import net.shibboleth.utilities.java.support.security.impl.RandomIdentifierGenerationStrategy;
 import org.opensaml.core.xml.io.MarshallingException;
 import org.opensaml.saml.saml2.core.Assertion;
@@ -29,8 +31,6 @@ import org.opensaml.xmlsec.signature.support.SignatureException;
 import org.opensaml.xmlsec.signature.support.Signer;
 import org.springframework.stereotype.Service;
 
-import jakarta.annotation.PostConstruct;
-import javax.xml.crypto.dsig.CanonicalizationMethod;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -81,7 +81,7 @@ public class BrokerIdpSamlService {
      * @param sessionId the sign-flow session ID
      * @return the SAML Assertion
      */
-    public String buildAssertion(String sessionId) throws IOException {
+    public String buildAssertion(String sessionId, String sendLoIP) throws IOException {
 
         Date issueInstant = new Date();
 
@@ -115,6 +115,8 @@ public class BrokerIdpSamlService {
         addAssertionAttribute(OIOSAMLAttribute.ATTRIBUTE_EMAIL, attributeStatement, samlProps.getAttrEmail());
         addAssertionAttribute(OIOSAMLAttribute.ATTRIBUTE_AGE, attributeStatement, samlProps.getAttrAge());
         addAssertionAttribute(OIOSAMLAttribute.ATTRIBUTE_CERT_ANONYMIZED_SIGNER, attributeStatement, samlProps.getAttrAnonymized());
+        if("on".equals(sendLoIP)) addAssertionAttribute(OIOSAMLAttribute.ATTRIBUTE_LOIP, attributeStatement, samlProps.getAttrLoIP());
+
         assertion.getAttributeStatements().add(attributeStatement);
 
         // Issuer

@@ -26,7 +26,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -143,8 +142,7 @@ public class SignersDocumentService {
      * @return the list of {@link SignersDocument}
      */
     public List<SignersDocument> documents() throws IOException {
-        return documents(VALID_FILE_PATTERNS, true)
-            .collect(Collectors.toList());
+        return documents(VALID_FILE_PATTERNS, true).toList();
     }
 
 
@@ -176,24 +174,14 @@ public class SignersDocumentService {
                 .setUrl(resource.getURL())
                 .build();
             SignProperties props = getProperties(fileName);
-            SignersDocument sd;
-            switch (SigningUtils.fileExtension(fileName).toLowerCase()) {
-                case "pdf":
-                    sd = new PdfSignersDocument(sdf, props);
-                    break;
-                case "txt":
-                    sd = new PlainTextSignersDocument(sdf, useMonoSpaceFont(fileName), props);
-                    break;
-                case "html":
-                    sd = new HtmlSignersDocument(sdf, props);
-                    break;
-                case "xml":
-                    sd = new XmlSignersDocument(sdf, getXslt(fileName), props);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid Signer's Document type: " + fileName);
-            }
-            return sd;
+            return switch (SigningUtils.fileExtension(fileName).toLowerCase()) {
+                case "pdf" -> new PdfSignersDocument(sdf, props);
+                case "txt" -> new PlainTextSignersDocument(sdf, useMonoSpaceFont(fileName), props);
+                case "html" -> new HtmlSignersDocument(sdf, props);
+                case "xml" -> new XmlSignersDocument(sdf, getXslt(fileName), props);
+                default -> throw new IllegalArgumentException("Invalid Signer's Document type: " + fileName);
+            };
+
         } catch (NemLogInException | IOException e) {
             LOG.error("error accessing resource {}", resource, e);
             return null;
@@ -227,12 +215,14 @@ public class SignersDocumentService {
      */
     private SignProperties getProperties(String fileName) {
 
+        SignProperties signProperties = new SignProperties();
+
         try {
             Resource propFile = resource(SigningUtils.fileName(fileName, "properties"));
             Properties properties = new Properties();
             try (InputStream in = propFile.getInputStream()) {
                 properties.load(in);
-                SignProperties signProperties = new SignProperties();
+
                 properties.stringPropertyNames().forEach(
                     key -> signProperties.put(key, new StringValue(properties.getProperty(key)))
                 );
@@ -240,7 +230,7 @@ public class SignersDocumentService {
             }
         } catch (IOException e) {
             LOG.trace("unable to read property in file : {}", fileName, e);
-            return null;
+            return signProperties;
         }
     }
 

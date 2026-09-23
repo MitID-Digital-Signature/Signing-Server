@@ -2,6 +2,7 @@ package dk.gov.nemlogin.signing.controller;
 
 import dk.gov.nemlogin.signing.service.SignersDocumentService;
 import dk.gov.nemlogin.signing.util.SigningUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -163,9 +163,9 @@ public class SignersDocumentController {
             try(var stream = Files.walk(signersDocumentService.checkCreateSdFolder())) {
                 stream.filter(Files::isRegularFile)
                     .toList()
-                    .forEach(x -> x.toFile().delete()) ;
+                    .forEach(SignersDocumentController::deleteFile);
             }
-            signersDocumentService.checkCreateSdFolder().toFile().delete();
+            deleteFile(signersDocumentService.checkCreateSdFolder());
         }
         return indexPage(model);
     }

@@ -3,7 +3,6 @@ package dk.gov.nemlogin.signing.spring;
 import dk.gov.nemlogin.signing.model.SignatureKeys;
 import dk.gov.nemlogin.signing.service.SigningPayloadService;
 import dk.gov.nemlogin.signing.util.SignatureKeysProducer;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -43,21 +42,18 @@ public class NemLogInAutoConfiguration {
 
 
     @Bean
-    @Qualifier("signingClientUrl")
     public String signingClientUrl() {
         return nemLogInSigningProperties.getSigningClientUrl();
     }
 
 
     @Bean
-    @Qualifier("validationServiceUrl")
     public String validationServiceUrl() {
         return nemLogInSigningProperties.getValidationServiceUrl();
     }
 
 
     @Bean
-    @Qualifier("entityID")
     public String entityID() {
         return nemLogInSigningProperties.getEntityId();
     }
@@ -67,4 +63,5 @@ public class NemLogInAutoConfiguration {
     public SigningPayloadService signingPayloadService() {
         return new SigningPayloadService();
     }
+
 }

@@ -1,8 +1,7 @@
 package dk.gov.nemlogin.signing.spring;
 
-import dk.gov.nemlogin.signing.service.SigningPayloadService;
-import dk.gov.nemlogin.signing.spring.NemLogInAutoConfiguration;
 import dk.gov.nemlogin.signing.model.SignatureKeys;
+import dk.gov.nemlogin.signing.service.SigningPayloadService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;

@@ -128,14 +128,14 @@ public class AllDocumentFormatTransformationService implements FormatTransformat
         Collection<PropertyType> properties = new ArrayList<>();
         ctx.getSignersDocument().getProperties().keySet().forEach(key -> {
                 final SignProperties.SignPropertyValue<?> value = ctx.getSignersDocument().getProperties().get(key);
-                if (value instanceof SignProperties.StringValue) {
+                if (value instanceof SignProperties.StringValue stringValue) {
                     properties.add(objectFactory.createPropertyType()
                         .withKey(key)
-                        .withStringValue(((SignProperties.StringValue) value).serialize()));
-                } else if (value instanceof SignProperties.BinaryValue) {
+                        .withStringValue(stringValue.serialize()));
+                } else if (value instanceof SignProperties.BinaryValue binaryValue) {
                     properties.add(objectFactory.createPropertyType()
                         .withKey(key)
-                        .withBinaryValue(((SignProperties.BinaryValue) value).serialize()));
+                        .withBinaryValue(binaryValue.serialize()));
                 }
             }
         );

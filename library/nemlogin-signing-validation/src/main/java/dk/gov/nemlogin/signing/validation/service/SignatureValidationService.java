@@ -6,25 +6,31 @@ import dk.gov.nemlogin.signing.exceptions.NemLogInException;
 import dk.gov.nemlogin.signing.util.SigningUtils;
 import dk.gov.nemlogin.signing.validation.model.SignatureValidationContext;
 import dk.gov.nemlogin.signing.validation.model.ValidationReport;
+import javax.net.ssl.SSLContext;
 import org.apache.hc.client5.http.ClientProtocolException;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.entity.mime.HttpMultipartMode;
 import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
-import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
-import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactoryBuilder;
+import org.apache.hc.client5.http.ssl.ClientTlsStrategyBuilder;
+import org.apache.hc.client5.http.ssl.TlsSocketStrategy;
 import org.apache.hc.client5.http.ssl.TrustAllStrategy;
-import org.apache.hc.core5.http.*;
+import org.apache.hc.core5.http.ClassicHttpRequest;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpHeaders;
+import org.apache.hc.core5.http.HttpStatus;
 import org.apache.hc.core5.http.io.HttpClientResponseHandler;
 import org.apache.hc.core5.http.io.support.ClassicRequestBuilder;
+import org.apache.hc.core5.http.nio.ssl.TlsStrategy;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
 import org.apache.hc.core5.util.Timeout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.net.ssl.SSLContext;
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
@@ -62,19 +68,26 @@ public class SignatureValidationService {
             } catch (KeyStoreException | KeyManagementException | NoSuchAlgorithmException e) {
                 throw new IOException(e);
             }
-            httpClientBuilder
-                .setConnectionManager(PoolingHttpClientConnectionManagerBuilder.create()
-                    .setSSLSocketFactory(SSLConnectionSocketFactoryBuilder.create()
-                        .setSslContext(sslContext)
-                        .setHostnameVerifier(NoopHostnameVerifier.INSTANCE)
-                        .build())
-                    .build());
+
+            TlsStrategy tlsStrategy = ClientTlsStrategyBuilder.create()
+                .setSslContext(sslContext)
+                .build();
+
+            PoolingHttpClientConnectionManager connectionManager = PoolingHttpClientConnectionManagerBuilder.create()
+                .setTlsSocketStrategy((TlsSocketStrategy) tlsStrategy)
+                .setMaxConnTotal(50)
+                .setMaxConnPerRoute(50)
+                .build();
+
+            httpClientBuilder = HttpClients.custom()
+                .setConnectionManager(connectionManager)
+                .disableRedirectHandling()
+                .disableConnectionState();
         }
 
         // Handle timeouts
         if (ctx.getTimeout() != null) {
             RequestConfig config = RequestConfig.custom()
-                .setConnectTimeout(Timeout.ofMilliseconds(ctx.getTimeout()))
                 .setConnectionRequestTimeout(Timeout.ofMilliseconds(ctx.getTimeout()))
                 .setResponseTimeout(Timeout.ofMilliseconds(ctx.getTimeout()))
                 .build();

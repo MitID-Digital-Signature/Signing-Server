@@ -1,7 +1,16 @@
 package dk.gov.nemlogin.signing.controller;
 
+import dk.gov.nemlogin.signing.client.DetailedSigningClientError;
+import dk.gov.nemlogin.signing.client.SigningClientError;
+import dk.gov.nemlogin.signing.exceptions.ErrorCode;
+import dk.gov.nemlogin.signing.exceptions.NemLogInException;
+import dk.gov.nemlogin.signing.exceptions.SignedDocumentIntegrityException;
+import dk.gov.nemlogin.signing.model.IntegrityValues;
+import dk.gov.nemlogin.signing.service.ServiceLoaderFactory;
 import dk.gov.nemlogin.signing.service.SigningResultService;
 import dk.gov.nemlogin.signing.validation.model.ValidationReport;
+import jakarta.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -10,6 +19,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.Base64;
 import java.util.UUID;
 
 /**
@@ -33,8 +46,7 @@ public class SigningResultController {
     public static final String RESULT_TYPE_CANCEL = "cancelSign";
 
     private final SigningResultService signingResultService;
-
-
+    private final ObjectMapper mapper = new ObjectMapper();
     /**
      * Constructor
      **/
@@ -54,17 +66,10 @@ public class SigningResultController {
         @RequestParam String format,
         @RequestParam String result,
         @RequestParam String correlationId,
-        Model model) {
+        Model model,
+        HttpSession session) throws NemLogInException {
 
         LOG.info("Received signing document result: {} for document: {}", type, name);
-        if (RESULT_TYPE_ERROR.equals(type)) {
-            try {
-                String decoded = new String(java.util.Base64.getDecoder().decode(result), java.nio.charset.StandardCharsets.UTF_8);
-                LOG.error("Signing Client Error (decoded): {}", decoded);
-            } catch (Exception e) {
-                LOG.error("Signing Client Error (raw): {}", result);
-            }
-        }
         String signedDocumentFilename = signingResultService.signedDocumentFilename(name, format);
         model.addAttribute(RESULT_NAME, name);
         model.addAttribute(RESULT_SIGNED_DOCUMENT_FILENAME, signedDocumentFilename);
@@ -79,6 +84,13 @@ public class SigningResultController {
             model.addAttribute(RESULT_TYPE_DOCUMENT_SIGNED, result);
             model.addAttribute(RESULT_NEW_CORRELATION_ID, UUID.randomUUID().toString());
 
+            try {
+                IntegrityValues iv = mapper.readValue((String)session.getAttribute("iv"), IntegrityValues.class);
+                ServiceLoaderFactory.getDocumentIntegrityService(iv.getSignatureFormat()).verifySignedDocument(Base64.getDecoder().decode(result), iv);
+            } catch(Exception e) {
+                throw new NemLogInException(ErrorCode.SDK013, e);
+            }
+
             return "sign-complete";
 
         } else if (RESULT_TYPE_CANCEL.equals(type)) {
@@ -87,7 +99,14 @@ public class SigningResultController {
 
         } else if (RESULT_TYPE_ERROR.equals(type)) {
 
-            model.addAttribute("error", signingResultService.parseError(result));
+            SigningClientError error = signingResultService.parseError(result);
+            if (error.getDetails().get(0).getErrorCode().equals("SAML046")) {
+                var extraInfo = new DetailedSigningClientError();
+                extraInfo.setErrorCode("Info");
+                extraInfo.setErrorMessage("SAML046 Happens when time between identifying yourself and pressing sign takes too logn");
+                error.getDetails().add(extraInfo);
+            }
+            model.addAttribute("error", error);
             return "sign-error";
 
         } else {

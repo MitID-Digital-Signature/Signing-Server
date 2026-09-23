@@ -15,7 +15,7 @@ function ajaxSetup(sessionId = undefined) {
         'Accept': 'application/json',
         "CorrelationIdManager.CorrelationId": correlationId,
     };
-    const sessionHeader = sessionId ? { "X-DIGST-Signing-SessionId": sessionId } : {};
+    const sessionHeader = sessionId ? {"X-DIGST-Signing-SessionId": sessionId} : {};
     $.ajaxSetup({
         headers: {...basicHeaders, ...sessionHeader}
     });
@@ -23,8 +23,8 @@ function ajaxSetup(sessionId = undefined) {
 }
 
 /** Simulates sign-in by creating a mock Broker IdP SAML Assertion **/
-function samlAssertion() {
-    return $.get("/saml/saml-assertion");
+function samlAssertion(sendLoIP) {
+    return $.get("/saml/saml-assertion/" + sendLoIP);
 }
 
 /** Logs a message to the console **/
@@ -81,14 +81,14 @@ function initHtmlViewer(html) {
     const htmlViewer = $('<div/>', {'class': 'html-viewer', id: 'html-viewer'});
     htmlViewer.html(html);
     // To avoid CSS of the HTML affecting the surrounding content, embed in iframe
-    const htmlFrame = $('<iframe/>', { 'class': 'html-viewer-frame', 'id': 'html-viewer-frame'});
+    const htmlFrame = $('<iframe/>', {'class': 'html-viewer-frame', 'id': 'html-viewer-frame'});
     htmlFrame.appendTo('#document-viewer')
         // Bizarrely, Firefox seems to only update on 'load' whereas Chrome ignores this...
         .on('load', () => htmlFrame.contents().find('body').append(htmlViewer));
     htmlFrame.contents().find("body").append(htmlViewer);
 
     // Local anchor tags in HTML dynamically added to an iframe do not work well. Clicks will load entire page in iframe.
-    htmlViewer.find('a[href^="#"]').click(function(event){
+    htmlViewer.find('a[href^="#"]').click(function (event) {
         event.preventDefault();
         const a = htmlViewer.find(`a[name='${this.hash.substr(1)}']`);
         if (a.length > 0) {
@@ -119,15 +119,15 @@ function extractPlainText(xades) {
     let text = extractXmlElement(xades, "Document", true, true);
     // Escape all HTML entities
     // See https://stackoverflow.com/questions/14462612/escape-html-text-in-an-angularjs-directive
-    text = text.replace(/[\u00A0-\u9999<>\&\'\"]/gim, i => '&#' + i.charCodeAt(0) + ';');
+    text = text.replace(/[\u00A0-\u9999<>&'"]/gim, i => '&#' + i.charCodeAt(0) + ';');
     let html = text.split(/\r?\n/).join("<br />");
 
     const monospace = extractXmlElement(xades, "UseMonoSpaceFont");
     // Match the fonts used by SignSDK for generating PAdES
     if (monospace.toLowerCase() === "true") {
-        html = `<html><body"><pre style="font: medium Courier">${html}</pre></body></html>`;
+        html = `<html lang=""><body"><pre style="font: medium Courier">${html}</pre></body></html>`;
     } else {
-        html = `<html><body style="font: medium Helvetica">${html}</body></html>`;
+        html = `<html lang=""><body style="font: medium Helvetica">${html}</body></html>`;
     }
     return html;
 }
@@ -136,7 +136,7 @@ function extractPlainText(xades) {
  * Extracts XML + XSL from the XML
  */
 function extractXml(xades) {
-    const xml = extractXmlElement(xades,"Document", true, true);
+    const xml = extractXmlElement(xades, "Document", true, true);
     const xsl = extractXmlElement(xades, "Transformation", true, true);
     // Standard XSLT for modern browsers
     const xmlDoc = getDocument(xml);
@@ -152,7 +152,7 @@ function extractXml(xades) {
 function getDocument(xmlString) {
     const parser = new DOMParser();
     const document = parser.parseFromString(xmlString, "text/xml");
-    if (document.getElementsByTagName("parsererror").length > 0  ||
+    if (document.getElementsByTagName("parsererror").length > 0 ||
         document.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", 'parsererror').length > 0) {
         throw new Error("Error parsing XML");
     }
@@ -165,7 +165,7 @@ function convertDtbsToBinary(dtbs) {
     const rawLength = raw.length;
     const array = new Uint8Array(new ArrayBuffer(rawLength));
 
-    for(let i = 0; i < rawLength; i++) {
+    for (let i = 0; i < rawLength; i++) {
         array[i] = raw.charCodeAt(i);
     }
     return array;
@@ -178,7 +178,7 @@ function renderPdfPage(pdf, canvas, pageNumToRender = 1) {
         const viewport = page.getViewport(1);
         canvas.height = viewport.height;
         canvas.width = viewport.width;
-        let renderCtx = {canvasContext ,viewport};
+        let renderCtx = {canvasContext, viewport};
         page.render(renderCtx);
     });
 }
@@ -195,7 +195,7 @@ function initPdfJs(dtbs, canvas) {
 
 /** Initialize the PDF viewer **/
 function initPdfViewer(pdf) {
-    const pdfCanvas = $('<canvas/>',{ 'class':'pdf-viewer', id: 'pdf-viewer' });
+    const pdfCanvas = $('<canvas/>', {'class': 'pdf-viewer', id: 'pdf-viewer'});
     $('#document-viewer').append(pdfCanvas);
     initPdfJs(pdf, pdfCanvas[0]);
 }

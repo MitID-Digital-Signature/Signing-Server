@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments/layout :: headFragment"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head th:include="fragments/layout :: headFragment"><title> </title></head>
 <body>
 <!--suppress JSJQueryEfficiency -->
 <!--/*@thymesVar id="format" type="String"*/-->
@@ -14,6 +14,10 @@
 
     <div class="page-content">
 
+      <div>
+        <label for="send-loip">Send LoIP</label>
+        <input type="checkbox" onchange="updateLoIPCheckbox()" id="send-loip" checked="checked">
+      </div>
       <div class="mb-5">
             <span style="float: right">
               <a href="/" class="btn btn-secondary" id="back">Back</a>
@@ -103,12 +107,22 @@
     }
   }
 
+  function updateLoIPCheckbox() {
+
+    if (document.getElementById("send-loip").value === "on") {
+      document.getElementById("send-loip").value = "off";
+    } else {
+      document.getElementById("send-loip").value = "on";
+    }
+  }
 
   /** Start signing the document - common for both XAdES and PAdES **/
   async function signDocument() {
+
     $('#sign-in').attr('disabled', 'disabled');
+    let sendLoIP = document.getElementById("send-loip").value;
     try {
-      const samlPayload = await samlAssertion();
+      const samlPayload = await samlAssertion(sendLoIP);
       logToConsole(`Simulated Broker IdP sign-in. Result:
         samlAssertion: ${trunc(samlPayload.samlAssertion)}`);
 
@@ -135,9 +149,8 @@
     }
   }
 
-  function parseError(e){
-    if(e.responseText===undefined)
-    {
+  function parseError(e) {
+    if (e.responseText === undefined) {
       return e;
     } else {
       return e.responseText;
