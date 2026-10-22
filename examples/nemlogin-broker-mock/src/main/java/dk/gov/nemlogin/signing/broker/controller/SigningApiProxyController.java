@@ -1,6 +1,8 @@
 package dk.gov.nemlogin.signing.broker.controller;
 
 import dk.gov.nemlogin.signing.broker.model.JsonPayload;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,12 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.Serial;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.Set;
@@ -46,6 +46,7 @@ import static java.util.Spliterators.spliteratorUnknownSize;
 public class SigningApiProxyController extends HttpServlet {
 
     // HttpServlet is Serializable
+    @Serial
     private static final long serialVersionUID = 1L;
     private static final Logger LOG = LoggerFactory.getLogger(SigningApiProxyController.class);
 
@@ -64,10 +65,10 @@ public class SigningApiProxyController extends HttpServlet {
      **/
     public SigningApiProxyController(
         @Qualifier("signingApiUrl") String signingApiUrl,
-        @Qualifier("proxyRestTemplate") RestTemplate proxyRestTemplate) throws MalformedURLException {
+        @Qualifier("proxyRestTemplate") RestTemplate proxyRestTemplate){
         this.proxyRestTemplate = proxyRestTemplate;
         this.signingApiUrl = signingApiUrl;
-        this.host = new URL(signingApiUrl).getHost();
+        this.host = URI.create(signingApiUrl).getHost();
     }
 
     /**

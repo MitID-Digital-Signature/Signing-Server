@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -106,7 +107,7 @@ public class SigningUtils {
         } else if (path.startsWith("file:")) {
             return loadBytes(Paths.get(path.substring("file:".length())));
         } else if (path.startsWith("http:") || path.startsWith("https:")) {
-            return loadBytes(new URL(path));
+            return loadBytes(URI.create(path).toURL());
         } else {
             return loadBytes(path);
         }

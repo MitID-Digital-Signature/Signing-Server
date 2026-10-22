@@ -76,7 +76,7 @@ public class ValidationPdfParser extends PDFParser {
         // Compute the list of non-reference object numbers by comparing with the XRef
         List<COSObjectKey> nonReferencedObjKeys = document.getXrefTable().keySet().stream()
             .filter(objKey -> !objNumbers.contains(objKey.getNumber()))
-            .collect(Collectors.toList());
+            .toList();
 
         // Parse the non-referenced objects - will be added to the document object pool
         for (COSObjectKey objKey : nonReferencedObjKeys) {

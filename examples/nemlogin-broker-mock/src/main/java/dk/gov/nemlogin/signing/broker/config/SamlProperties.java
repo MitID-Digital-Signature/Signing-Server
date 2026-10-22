@@ -1,8 +1,11 @@
 package dk.gov.nemlogin.signing.broker.config;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
 /**
  * SAML properties
  **/
+@ConfigurationProperties(prefix = "nemlogin.signing.broker.saml")
 public class SamlProperties {
     private String spEntityId;
     private String assertionConsumerUrl;
@@ -14,6 +17,7 @@ public class SamlProperties {
     private String attrEmail;
     private String attrAge;
     private String attrAnonymized;
+    private String attrLoIP;
 
     public String getSpEntityId() {
         return spEntityId;
@@ -49,6 +53,14 @@ public class SamlProperties {
 
     public String getAttrLoa() {
         return attrLoa;
+    }
+
+    public void setAttrLoIP(String attrLoIP) {
+        this.attrLoIP = attrLoIP;
+    }
+
+    public String getAttrLoIP() {
+        return attrLoIP;
     }
 
     public void setAttrLoa(String attrLoa) {

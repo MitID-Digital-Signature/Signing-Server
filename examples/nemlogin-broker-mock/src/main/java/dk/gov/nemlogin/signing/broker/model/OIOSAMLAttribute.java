@@ -9,7 +9,12 @@ import org.opensaml.saml.saml2.core.AttributeStatement;
 import org.opensaml.saml.saml2.core.AttributeValue;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import static dk.gov.nemlogin.signing.broker.model.OIOSAMLAttribute.NamePrefix.DATA_GOV_DK;
+import static dk.gov.nemlogin.signing.broker.model.OIOSAMLAttribute.NamePrefix.NEM_LOGIN_DK;
 
 /**
  * Implementation of OIOSAML Assertion Attributes
@@ -17,33 +22,65 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public class OIOSAMLAttribute {
 
-    public static final String NAME_PREFIX = "https://data.gov.dk/";
+    public enum NamePrefix {
+        DATA_GOV_DK("https://data.gov.dk/"),
+        NEM_LOGIN_DK("https://nemlog-in.dk/");
+
+        final String prefixString;
+
+        NamePrefix(String prefixString) {
+            this.prefixString = prefixString;
+        }
+    }
+
+    static final List<OIOSAMLAttribute> ALL = new ArrayList<>(2);
+
     static final String ATTRIBUTE_VALUE_FORMAT = "urn:oasis:names:tc:SAML:2.0:attrname-format:uri";
 
     // Common OIOSAML attributes
-    public static final OIOSAMLAttribute ATTRIBUTE_SPEC_VERSION = attr("model/core/specVersion", "SpecVer");
-    public static final OIOSAMLAttribute ATTRIBUTE_LOA = attr("concept/core/nsis/loa", "LoA");
-    public static final OIOSAMLAttribute ATTRIBUTE_FULL_NAME = attr("model/core/eid/fullName", "FullName");
-    public static final OIOSAMLAttribute ATTRIBUTE_FIRST_NAME = attr("model/core/eid/firstName", "FirsName");
-    public static final OIOSAMLAttribute ATTRIBUTE_LAST_NAME = attr("model/core/eid/lastName", "LastName");
-    public static final OIOSAMLAttribute ATTRIBUTE_AGE = attr("model/core/eid/age", "Age");
-    public static final OIOSAMLAttribute ATTRIBUTE_CVR = attr("model/core/eid/professional/cvr", "CVR");
-    public static final OIOSAMLAttribute ATTRIBUTE_ORG_NAME = attr("model/core/eid/professional/orgName", "OrganizationName");
-    public static final OIOSAMLAttribute ATTRIBUTE_EMAIL = attr("model/core/eid/email", "Email");
-    public static final OIOSAMLAttribute ATTRIBUTE_CERT_POLICY_QUALIFIER = attr("model/core/signing/certificatePolicyQualifier", "CertificatePolicyQualifier");
-    public static final OIOSAMLAttribute ATTRIBUTE_CERT_SSN_PERSISTENCE_LEVEL = attr("model/core/signing/certificateSSNPersistenceLevel", "CertificateSSNPersistenceLevel");
-    public static final OIOSAMLAttribute ATTRIBUTE_CERT_HOLDER_ID = attr("model/core/signing/certificateHolderIdentifier", "CertificateHolderIdentifier");
-    public static final OIOSAMLAttribute ATTRIBUTE_CERT_CN = attr("model/core/signing/certificateCommonName", "CertificateCommonName");
-    public static final OIOSAMLAttribute ATTRIBUTE_CERT_ANONYMIZED_SIGNER = attr("model/core/signing/anonymizedSigner", "AnonymizedSigner");
+    public static final OIOSAMLAttribute ATTRIBUTE_SPEC_VERSION = attr(DATA_GOV_DK,"model/core/specVersion", "SpecVer", true);
+    public static final OIOSAMLAttribute ATTRIBUTE_LOA = attr(DATA_GOV_DK,"concept/core/nsis/loa", "LoA", true);
+    public static final OIOSAMLAttribute ATTRIBUTE_FULL_NAME = attr(DATA_GOV_DK,"model/core/eid/fullName", "FullName", false);
+    public static final OIOSAMLAttribute ATTRIBUTE_FIRST_NAME = attr(DATA_GOV_DK,"model/core/eid/firstName", "FirsName", false, true);
+    public static final OIOSAMLAttribute ATTRIBUTE_LAST_NAME = attr(DATA_GOV_DK,"model/core/eid/lastName", "LastName", false, true);
+    public static final OIOSAMLAttribute ATTRIBUTE_AGE = attr(DATA_GOV_DK,"model/core/eid/age", "Age", false, true);
+    public static final OIOSAMLAttribute ATTRIBUTE_CVR = attr(DATA_GOV_DK,"model/core/eid/professional/cvr", "CVR", false);
+    public static final OIOSAMLAttribute ATTRIBUTE_ORG_NAME = attr(DATA_GOV_DK,"model/core/eid/professional/orgName", "OrganizationName", false, true);
+    public static final OIOSAMLAttribute ATTRIBUTE_EMAIL = attr(DATA_GOV_DK,"model/core/eid/email", "Email", false);
+
+    // NL3 Assertion attributes
+    public static final OIOSAMLAttribute ATTRIBUTE_CERT_POLICY_QUALIFIER = attr(DATA_GOV_DK,"model/core/signing/certificatePolicyQualifier", "CertificatePolicyQualifier", true);
+    public static final OIOSAMLAttribute ATTRIBUTE_CERT_SSN_PERSISTENCE_LEVEL = attr(DATA_GOV_DK,"model/core/signing/certificateSSNPersistenceLevel", "CertificateSSNPersistenceLevel", true);
+    public static final OIOSAMLAttribute ATTRIBUTE_CERT_HOLDER_ID = attr(DATA_GOV_DK,"model/core/signing/certificateHolderIdentifier", "CertificateHolderIdentifier", true);
+    public static final OIOSAMLAttribute ATTRIBUTE_CERT_CN = attr(DATA_GOV_DK,"model/core/signing/certificateCommonName", "CertificateCommonName", false);
+    public static final OIOSAMLAttribute ATTRIBUTE_CERT_ANONYMIZED_SIGNER = attr(DATA_GOV_DK,"model/core/signing/anonymizedSigner", "AnonymizedSigner", false);
+    public static final OIOSAMLAttribute ATTRIBUTE_REFERENCE_TEXT = attr(DATA_GOV_DK,"model/core/signing/referenceText", "ReferenceText", true);
+    public static final OIOSAMLAttribute ATTRIBUTE_LOIP = attr(NEM_LOGIN_DK, "internal/loipextended", "LoIP", false);
 
     private final String name;
     private final String friendlyName;
-
+    private final boolean required;
+    private final boolean metadata;
 
     /** Constructor **/
-    private OIOSAMLAttribute(String name, String friendlyName) {
-        this.name = NAME_PREFIX + Objects.requireNonNull(name);
+    private OIOSAMLAttribute(NamePrefix namePrefix, String name, String friendlyName, boolean required, boolean metadata) {
+        this.name = namePrefix.prefixString + Objects.requireNonNull(name);
         this.friendlyName = friendlyName;
+        this.required = required;
+        this.metadata = metadata;
+    }
+
+
+    /** Factory method **/
+    public static OIOSAMLAttribute attr(NamePrefix prefix, String name, String friendlyName, boolean required, boolean metadata) {
+        var attribute = new OIOSAMLAttribute(prefix, name, friendlyName, required, metadata);
+        ALL.add(attribute);
+        return attribute;
+    }
+
+    /** Factory method **/
+    public static OIOSAMLAttribute attr(NamePrefix prefix, String name, String friendlyName, boolean required) {
+        return attr(prefix, name, friendlyName, required, false);
     }
 
     public String getName() {
@@ -52,11 +89,6 @@ public class OIOSAMLAttribute {
 
     public String getFriendlyName() {
         return friendlyName;
-    }
-
-    /** Factory method **/
-    public static OIOSAMLAttribute attr(String name, String friendlyName) {
-        return new OIOSAMLAttribute(name, friendlyName);
     }
 
 

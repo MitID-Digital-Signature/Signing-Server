@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import java.awt.Font;
+import java.awt.*;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.Properties;
@@ -45,6 +45,7 @@ public class TransformationPropertiesService {
      * @return transformation properties
      */
     public Properties getTransformationProperties(SignersDocument sd, SignatureFormat signatureFormat) {
+        Properties props = new Properties();
         // Check that we actually generate PDF
         if (signatureFormat == SignatureFormat.PAdES && sd.getFormat() != DocumentFormat.PDF) {
 
@@ -57,7 +58,7 @@ public class TransformationPropertiesService {
                     .findFirst()
                     .map(font -> {
                         LOG.info("Embedding font '{}'", font.getName());
-                        Properties props = new Properties();
+
                         // Embed the found font along with the 14 standard PDF fonts
                         props.setProperty(KEY_PREFIX + "fonts", "embed, default");
                         props.setProperty(KEY_PREFIX + "font[0].name", font.getName());
@@ -72,7 +73,7 @@ public class TransformationPropertiesService {
                 LOG.trace("error ignored", e);
             }
         }
-        return null;
+        return props;
     }
 
 

@@ -1,6 +1,7 @@
 # NemLog-In Java SignSDK
 
 This project is the official NemLog-In Signing SDK Java implementation for Service Providers and Brokers.
+This repository implements the SignSDK 2.2.0 release. The Java implementation in this repository is Java SignSDK 2.0.10.
 
 # Documentation
 
@@ -58,42 +59,41 @@ which demonstrates how to use the SignSDK library.
 
 ## Prerequisite
 
-* Java 17
+* Java 21
 * Maven
 
 # Building
 
-    mvn clean install
+    mvn clean verify
+
+The example web application is packaged as an executable Spring Boot JAR using the `spring-boot-maven-plugin`.
 
 # Testing Example Web Application
 
-    java -jar examples/nemlogin-signing-webapp/target/nemlogin-signing-webapp-0.0.4.exe.jar
+    java -jar examples/nemlogin-signing-webapp/target/nemlogin-signing-webapp-2.0.10.jar
 
 Access webapp on http://localhost:8080
 
 ## Changelog
 
-### Version 2.0.2
+### Version 2.0.10
 
-Moved readme.md to README.md
-Changes to start.sh to do shutdown and restart. And work without hardcoded paths. 
-Made changes to not have fixed folders for signed documunents. It can now be set via the appl....
-* examples/nemlogin-signing-webapp/src/main/java/dk/gov/nemlogin/signing/service/DocumentSigningService.java
-* examples/nemlogin-signing-webapp/src/main/java/dk/gov/nemlogin/signing/service/SigningResultService.java
+Upgrade to Java 21
+Upgrade to Spring Boot 3.4.5
+Upgrade to Spring Security 6.5.8
+Upgrade Bouncycastle to 1.8.3
+Added sdkTypeAndVersion (SignSDKJava2.2)
+Add loip to broker mock
+Signature digest verified after signing flow
 
-Modifies sign-complete.html to redirect to sign.php as not to break the flow with the drupal modules. 
-* examples/nemlogin-signing-webapp/src/main/resources/templates/sign-complete.html
-
-Added settings for the application settings file for changing folder paths for signing documents. If the settings are not there the defaults are used. 
-* examples/nemlogin-signing-webapp/src/main/resources/default.application.yaml
 
 ### Version 2.0.2
 
-Fixed  bug related to wrong .pom file uploaded in version 2.0.1 of the zip
+Fixed bug related to wrong .pom file uploaded in version 2.0.1 of the zip
 
 ### Version 2.0.1
 
-Updated package Java version from 11.0.2 to jdk : temurin-17.0.9 for Windows and jdk-17.0.9+9 for Mac
+Updated package Java version from 11.0.2 to jdk: temurin-17.0.9 for Windows and jdk-17.0.9+9 for Mac
 Updated Spring Boot version to 3.2 in example webapps
 
 ### Version 1.0.4
@@ -128,3 +128,50 @@ to:
 
 ### Version 0.0.1
 * Initial release (internal)
+
+## Bellcom / OS2Forms integration
+
+The SignSDK 2.2.0 upgrade is tracked in:
+
+https://github.com/OS2Forms/os2forms/issues/350
+
+This repository uses Java SignSDK 2.0.10.
+
+### Bellcom customizations
+
+The upstream example web application contains Bellcom-specific integration changes that must be preserved during future SignSDK upgrades:
+
+- configurable source document directory (`sd-folder`)
+- configurable DTBS output directory (`save-dtbs-to-folder`)
+- configurable signed-document directory (`save-signed-document-to-folder`)
+- redirect back to the PHP/Drupal signing flow after successful signing
+- deployment configuration example in `default.application.yaml`
+
+The existing Bellcom result handoff is preserved in `sign-complete.html`.
+
+The template contains both:
+
+- the immediate meta refresh to `/sign?action=result&cid=<correlation-id>&file=<filename>`
+- the Bellcom `/sign.php?action=result&cid=<correlation-id>&file=<filename>` link, which is triggered on page load
+
+This behavior is unchanged from the integration before the SignSDK upgrade.
+
+Production `application.yaml` files and production PKCS#12 certificates must not be committed to Git.
+
+The test certificate in `test/nemlogin-signing-test/src/test/resources/TU-Test.p12` is intentionally tracked.
+
+### Integrity verification in Java SignSDK 2.0.10
+
+Java SignSDK 2.0.10 introduces signed-document integrity verification.
+
+`IntegrityValues` are generated together with the signing payload and stored in the HTTP session. When `/signing-result` receives the signed document, the stored integrity values are used to verify the returned document.
+
+The HTTP session must therefore survive the complete signing flow. Restarting the application while a signing operation is active may cause that operation to fail.
+
+### Building the production JAR
+
+The web application POM binds the Spring Boot `repackage` goal, so a normal Maven build produces an executable JAR:
+
+`examples/nemlogin-signing-webapp/target/nemlogin-signing-webapp-2.0.10.jar`
+
+`start.sh` can be used for manual operation. Production installations should preferably run the JAR directly under a service manager such as systemd.

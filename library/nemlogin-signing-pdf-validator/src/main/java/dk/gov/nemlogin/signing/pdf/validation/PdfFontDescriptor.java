@@ -39,8 +39,7 @@ public class PdfFontDescriptor {
     public static PdfFontDescriptor fromFontDescriptor(COSObject cosObject, COSDictionary dict) {
         PdfFontDescriptor res = null;
         var cosBase = dict.getDictionaryObject("FontName");
-        if (cosBase instanceof COSName) {
-            var fontNameCosName = (COSName) cosBase;
+        if (cosBase instanceof COSName fontNameCosName) {
             boolean embedded = dict.getDictionaryObject("FontFile") != null || dict.getDictionaryObject("FontFile2") != null || dict.getDictionaryObject("FontFile3") != null;
             res = new PdfFontDescriptor(cosObject, dict, fontNameCosName, embedded);
         }
@@ -50,13 +49,13 @@ public class PdfFontDescriptor {
     public static PdfFontDescriptor fromFont(COSObject cosObject, COSDictionary dict) {
         var baseFontCosBase = dict.getDictionaryObject("BaseFont");
         COSName baseFontCosName = null;
-        if (baseFontCosBase instanceof COSName) {
-            baseFontCosName = (COSName) baseFontCosBase;
+        if (baseFontCosBase instanceof COSName cosname) {
+            baseFontCosName = cosname;
         }
         String subType = null;
         var subTypeCosBase = dict.getDictionaryObject("Subtype");
-        if (subTypeCosBase instanceof COSName) {
-            subType = ((COSName) subTypeCosBase).getName();
+        if (subTypeCosBase instanceof COSName cosname) {
+            subType = cosname.getName();
         }
 
         if ("Type0".equals(subType)) {

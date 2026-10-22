@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- dependencies checked 08-04-2026 -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -6,7 +9,7 @@
     <parent>
         <groupId>dk.gov.nemlogin</groupId>
         <artifactId>nemlogin-sign-sdk-java</artifactId>
-        <version>2.0.2</version>
+        <version>2.0.10</version>
 		<relativePath>../..</relativePath>
     </parent>
 
@@ -15,9 +18,9 @@
     <name>NemLog-In SP Java SDK XAdES Library</name>
 
     <properties>
-        <jaxb-bind.version>4.0.1</jaxb-bind.version>
-        <jaxb-runtime.version>4.0.4</jaxb-runtime.version>
-        <xmlsec.version>2.3.3</xmlsec.version>
+        <jaxb-bind.version>4.0.5</jaxb-bind.version>
+        <jaxb-runtime.version>4.0.7</jaxb-runtime.version>
+        <xmlsec.version>2.3.5</xmlsec.version> <!-- microservice tests would not run if higher - latest versions 4.0.4, 3.0.6 -->
     </properties>
 
     <dependencies>

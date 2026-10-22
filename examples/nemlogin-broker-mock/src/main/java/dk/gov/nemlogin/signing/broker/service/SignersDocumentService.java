@@ -19,7 +19,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -91,7 +90,7 @@ public class SignersDocumentService {
      */
     public List<SignersDocument> documents() throws IOException {
         return documents(VALID_FILE_PATTERNS, true)
-            .collect(Collectors.toList());
+            .toList();
     }
 
 
@@ -121,24 +120,13 @@ public class SignersDocumentService {
                 .setName(fileName)
                 .setUrl(resource.getURL())
                 .build();
-            SignersDocument sd;
-            switch (SigningUtils.fileExtension(fileName).toLowerCase()) {
-                case "pdf":
-                    sd = new PdfSignersDocument(sdf);
-                    break;
-                case "txt":
-                    sd = new PlainTextSignersDocument(sdf, false);
-                    break;
-                case "html":
-                    sd = new HtmlSignersDocument(sdf);
-                    break;
-                case "xml":
-                    sd = new XmlSignersDocument(sdf, getXslt(fileName));
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid Signer's Document type: " + fileName);
-            }
-            return sd;
+            return switch (SigningUtils.fileExtension(fileName).toLowerCase()) {
+                case "pdf" -> new PdfSignersDocument(sdf);
+                case "txt" -> new PlainTextSignersDocument(sdf, false);
+                case "html" -> new HtmlSignersDocument(sdf);
+                case "xml" -> new XmlSignersDocument(sdf, getXslt(fileName));
+                default -> throw new IllegalArgumentException("Invalid Signer's Document type: " + fileName);
+            };
         } catch (IOException | NemLogInException e) {
             LOG.error("error in resourceToSignersDocument", e);
             return null;

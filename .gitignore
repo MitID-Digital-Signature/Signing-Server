@@ -29,3 +29,5 @@ tmp/
 examples/nemlogin-signing-webapp/src/main/resources/application.yaml
 examples/nemlogin-signing-webapp/target/classes/application.yaml
 
+*.orig
+*.rej

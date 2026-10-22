@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Validates the PDF document against PDF whitelists and valid fonts
@@ -93,7 +92,7 @@ public class PdfValidationService implements SignersDocumentValidationService {
         return objectList.stream()
             .map(cosObject -> new PdfWhitelistValidator().whitelistValidation(cosObject))
             .flatMap(Collection::stream)
-            .collect(Collectors.toList());
+            .toList();
     }
 
 }

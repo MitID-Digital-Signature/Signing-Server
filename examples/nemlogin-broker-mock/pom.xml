@@ -2,11 +2,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- dependencies checked 08-04-2026 -->
+
     <parent>
         <groupId>dk.gov.nemlogin</groupId>
         <artifactId>nemlogin-sign-sdk-java</artifactId>
-        <version>2.0.2</version>
-		<relativePath>../..</relativePath>
+        <version>2.0.10</version>
+		<relativePath>../../pom.xml</relativePath>
     </parent>
 
     <artifactId>nemlogin-broker-mock</artifactId>
@@ -14,7 +16,7 @@
     <name>NemLog-In SP Java SDK Broker Mock</name>
 
     <properties>
-        <spring-boot.version>3.2.1</spring-boot.version>
+        <spring-boot.version>3.4.5</spring-boot.version>
         <opensaml.version>4.0.1</opensaml.version>
         <application.name>sign-sdk-broker</application.name>
     </properties>
@@ -182,9 +184,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.webjars.bowergithub.telecomsante</groupId>
-            <artifactId>pdf-viewer</artifactId>
-            <version>2.2.0</version>
+            <groupId>org.webjars.bowergithub.mozilla</groupId>
+            <artifactId>pdfjs-dist</artifactId>
+            <version>2.2.2</version>
         </dependency>
 
         <dependency>

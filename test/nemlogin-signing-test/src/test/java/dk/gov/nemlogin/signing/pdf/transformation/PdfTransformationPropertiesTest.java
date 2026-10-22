@@ -20,7 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static dk.gov.nemlogin.signing.pdf.TransformationPropertiesHandler.*;
+import static dk.gov.nemlogin.signing.pdf.TransformationPropertiesHandler.KEY_COLOR_PROFILE;
+import static dk.gov.nemlogin.signing.pdf.TransformationPropertiesHandler.KEY_FONTS;
+import static dk.gov.nemlogin.signing.pdf.TransformationPropertiesHandler.KEY_FONT_NAME;
+import static dk.gov.nemlogin.signing.pdf.TransformationPropertiesHandler.KEY_FONT_PATH;
+import static dk.gov.nemlogin.signing.pdf.TransformationPropertiesHandler.KEY_PAGE_MARGIN;
+import static dk.gov.nemlogin.signing.pdf.TransformationPropertiesHandler.KEY_PAGE_SIZE;
+import static dk.gov.nemlogin.signing.pdf.TransformationPropertiesHandler.KEY_PAGE_STYLE;
 
 /**
  * Tests using transformation properties to control HTML -> PDF transformation.
@@ -47,7 +53,7 @@ class PdfTransformationPropertiesTest {
         List<String> colorProfile = colorProfiles(doc);
         Assertions.assertEquals(1, colorProfile.size());
         // sRGB
-        Assertions.assertEquals("sRGB IEC61966-2.1", colorProfile.get(0));
+        Assertions.assertEquals("sRGB IEC61966-2.1", colorProfile.getFirst());
 
         props.setProperty(KEY_COLOR_PROFILE, "none");
         doc = generatePdf(props, "", "<p>test</p>");
@@ -70,7 +76,7 @@ class PdfTransformationPropertiesTest {
         PDDocument doc = generatePdf(props, "body { font-family: Helvetica; }", "<p>test</p>");
         List<String> fontNames = fontNames(doc);
         Assertions.assertEquals(1, fontNames.size());
-        Assertions.assertEquals("Helvetica", fontNames.get(0));
+        Assertions.assertEquals("Helvetica", fontNames.getFirst());
 
         props.setProperty(KEY_FONTS, "embed");
         props.setProperty(KEY_FONT_NAME.replace("[x]", "[0]"), "Karla");
@@ -78,7 +84,7 @@ class PdfTransformationPropertiesTest {
         doc = generatePdf(props, "body { font-family: Karla; }", "<p>test</p>");
         fontNames = fontNames(doc);
         Assertions.assertEquals(1, fontNames.size());
-        Assertions.assertTrue(fontNames.get(0).contains("Karla"));
+        Assertions.assertTrue(fontNames.getFirst().contains("Karla"));
     }
 
 
@@ -105,7 +111,7 @@ class PdfTransformationPropertiesTest {
             @Override
             protected void writeString(String text, List<TextPosition> textPositions) throws IOException {
                 // Letter "t"
-                TextPosition p0 = textPositions.get(0);
+                TextPosition p0 = textPositions.getFirst();
                 writeString(String.format("x: %scm, y: %scm",
                     posToCm(p0.getXDirAdj()),
                     // Deduct font height
@@ -116,10 +122,11 @@ class PdfTransformationPropertiesTest {
 
 
         // Will override size and margin with free-style CSS 2.1 page declaration
-        String pageStyle = "@page {\n" +
-            "    size: a5 portrait;\n" +
-            "    margin: 10mm;\n" +
-            "}";
+        String pageStyle = """
+                @page {
+                size: a5 portrait;
+                margin: 10mm;
+            }""";
         props.setProperty(KEY_PAGE_STYLE, pageStyle);
         doc = generatePdf(props, "body { font-family: Helvetica; }", "<p>test</p>");
         mediaBox = doc.getPage(0).getMediaBox();
