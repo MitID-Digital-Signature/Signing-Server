@@ -32,3 +32,4 @@ nemlogin:
                 attr-email: jane.fonda@threemileisland.com
                 attr-age: 103
                 attr-anonymized: false
+                attr-loip: true

@@ -8,8 +8,8 @@ import com.nimbusds.jose.crypto.RSASSAVerifier;
 import com.nimbusds.jose.util.X509CertUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import dk.gov.nemlogin.signing.AbstractSigningTest;
-import dk.gov.nemlogin.signing.format.SignatureFormat;
 import dk.gov.nemlogin.signing.format.DocumentFormat;
+import dk.gov.nemlogin.signing.format.SignatureFormat;
 import dk.gov.nemlogin.signing.model.FlowType;
 import dk.gov.nemlogin.signing.model.SignatureParameters;
 import dk.gov.nemlogin.signing.service.ServiceLoaderFactory;
@@ -24,7 +24,6 @@ import java.util.Map;
 
 /**
  * Tests of the {@link SignatureParameterSigningService} service.
- *
  * This test is not dependent on Spring.
  */
 class PdfSignatureParameterSigningServiceTest extends AbstractSigningTest {
@@ -52,7 +51,7 @@ class PdfSignatureParameterSigningServiceTest extends AbstractSigningTest {
         // Sign the parameters
         String jwsSignedParam = ServiceLoaderFactory.getSignatureParameterSigningService()
             .jwsSign(signatureParameters, signatureKeys);
-        LOG.info("Signed content: " + jwsSignedParam);
+        LOG.info("Signed content: {}", jwsSignedParam);
 
         // Parse the generated token
         JWSObject jwsObject = JWSObject.parse(jwsSignedParam);

@@ -30,6 +30,8 @@ public class SignatureParameters implements Serializable {
     public static final int INTERNAL_VERSION = 1;
     public static final String DTBS_DIGEST_ALGORITHM = "SHA-256";
     public static final int REFERENCE_TEXT_MAX_LENGTH = 50;
+    public static final String SDK_TYPE_AND_VERSION = "SignSDKJava2.2";
+
 
     @SuppressWarnings("FieldCanBeLocal")
     Integer version = INTERNAL_VERSION;
@@ -47,6 +49,7 @@ public class SignatureParameters implements Serializable {
     SsnPersistenceLevel ssnPersistenceLevel;
     Boolean anonymizeSigner;
     String acceptedCertificatePolicies;
+    String sdkTypeAndVersion;
 
 
     /** No-access constructor **/
@@ -74,6 +77,7 @@ public class SignatureParameters implements Serializable {
         this.ssnPersistenceLevel = params.ssnPersistenceLevel;
         this.anonymizeSigner = params.anonymizeSigner;
         this.acceptedCertificatePolicies = params.acceptedCertificatePolicies;
+        this.sdkTypeAndVersion = SDK_TYPE_AND_VERSION;
     }
 
 

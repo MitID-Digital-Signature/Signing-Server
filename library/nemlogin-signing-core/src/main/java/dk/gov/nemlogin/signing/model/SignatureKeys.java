@@ -1,12 +1,12 @@
 package dk.gov.nemlogin.signing.model;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Encapsulates the Service Provider private key and certificate chain used
@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unused")
 public class SignatureKeys implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private final transient PrivateKey privateKey;
@@ -46,8 +47,8 @@ public class SignatureKeys implements Serializable {
      */
     public List<X509Certificate> getNonRootCertificateChain() {
         return certificateChain.stream()
-            .filter(c -> !c.getIssuerDN().equals(c.getSubjectDN()))
-            .collect(Collectors.toList());
+            .filter(c -> !c.getIssuerX500Principal().getName().equals(c.getSubjectX500Principal().getName()))
+            .toList();
     }
 
 
@@ -57,7 +58,7 @@ public class SignatureKeys implements Serializable {
      */
     public X509Certificate getCertificate() {
         // First certificate of the chain is the actual certificate used for signing
-        return certificateChain.get(0);
+        return certificateChain.getFirst();
     }
 
 

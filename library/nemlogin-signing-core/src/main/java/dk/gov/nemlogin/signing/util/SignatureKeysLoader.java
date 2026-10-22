@@ -16,7 +16,6 @@ import java.security.cert.X509Certificate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static dk.gov.nemlogin.signing.util.SigningUtils.isEmpty;
@@ -100,7 +99,7 @@ public class SignatureKeysLoader {
             privateKey = (PrivateKey) keystore.getKey(keyPairAlias, privateKeyPassword.toCharArray());
             chain = Arrays.stream(keystore.getCertificateChain(keyPairAlias))
                 .map(X509Certificate.class::cast)
-                .collect(Collectors.toList());
+                .toList();
         } catch (UnrecoverableKeyException | CertificateException | NoSuchAlgorithmException | KeyStoreException e) {
             throw new IOException(e);
         }

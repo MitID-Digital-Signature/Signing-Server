@@ -14,7 +14,9 @@ public enum ErrorCode {
     SDK008("Error adding attachments to PDF DTBS document"),
     SDK009("Error transforming SD to XML DTBS document"),
     SDK010("Error validating SD"),
-    SDK011("Error validating document signature")
+    SDK011("Error validating document signature"),
+    SDK012("Error creating document integrity values"),
+    SDK013("Error validating document integrity")
     ;
 
 

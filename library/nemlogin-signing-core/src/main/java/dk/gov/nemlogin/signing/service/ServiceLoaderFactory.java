@@ -48,6 +48,17 @@ public class ServiceLoaderFactory {
 
 
     /**
+     * Returns a new {@link DocumentIntegrityService} service.
+     *
+     * @return a new {@link DocumentIntegrityService} service
+     * @throws ServiceUnavailableException if no implementation can be found
+     */
+    public static DocumentIntegrityService getDocumentIntegrityService(SignatureFormat signatureFormat) throws ServiceUnavailableException {
+        return loadService(DocumentIntegrityService.class, signatureFormat);
+    }
+
+
+    /**
      * Returns a new {@link SourceAttachmentService} service that supports source file attachments for
      * the transformation given by {@code ctx}.
      *

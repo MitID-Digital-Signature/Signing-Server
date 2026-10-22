@@ -45,7 +45,7 @@ public class NimbusSignatureParameterSigningService implements SignatureParamete
             long t0 = System.currentTimeMillis();
             LOG.debug("Start JWS-signing signature parameters");
             if (LOG.isTraceEnabled()) {
-                LOG.trace("Signing Certificate: {}", signatureKeys.getCertificate().getSubjectDN());
+                LOG.trace("Signing Certificate: {}", signatureKeys.getCertificate().getSubjectX500Principal().getName());
                 LOG.trace("Signature parameters: {}", params);
             }
 

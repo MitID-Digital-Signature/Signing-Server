@@ -1,5 +1,13 @@
 package dk.gov.nemlogin.signing.broker.utils;
 
+import javax.xml.XMLConstants;
+import javax.xml.namespace.QName;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.opensaml.core.config.InitializationException;
 import org.opensaml.core.config.InitializationService;
 import org.opensaml.core.xml.XMLObject;
@@ -17,14 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
-import javax.xml.XMLConstants;
-import javax.xml.namespace.QName;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Objects;
@@ -39,7 +39,9 @@ public final class SamlUtils {
     private SamlUtils() {
     }
 
-    /** Initialize OpenSAML **/
+    /**
+     * Initialize OpenSAML
+     **/
     public static void initOpenSAML() {
         try {
             JavaCryptoValidationInitializer cryptoValidationInitializer = new JavaCryptoValidationInitializer();
@@ -61,8 +63,8 @@ public final class SamlUtils {
     public static <T> T build(final Class<T> clazz) {
         try {
             XMLObjectBuilderFactory builderFactory = XMLObjectProviderRegistrySupport.getBuilderFactory();
-            QName defaultElementName = (QName)clazz.getDeclaredField("DEFAULT_ELEMENT_NAME").get(null);
-            return  (T) Objects.requireNonNull(builderFactory.getBuilder(defaultElementName))
+            QName defaultElementName = (QName) clazz.getDeclaredField("DEFAULT_ELEMENT_NAME").get(null);
+            return (T) Objects.requireNonNull(builderFactory.getBuilder(defaultElementName))
                 .buildObject(defaultElementName);
         } catch (IllegalAccessException | NoSuchFieldException e) {
             throw new IllegalArgumentException("Could not create SAML object for class " + clazz, e);
@@ -78,7 +80,7 @@ public final class SamlUtils {
     public static String serializeSamlObject(final XMLObject object, boolean indent) throws IOException {
         Element element;
 
-        if (object instanceof SignableSAMLObject && ((SignableSAMLObject)object).isSigned() && object.getDOM() != null) {
+        if (object instanceof SignableSAMLObject signableSAMLObject && signableSAMLObject.isSigned() && object.getDOM() != null) {
             element = object.getDOM();
         } else {
             Marshaller out = XMLObjectProviderRegistrySupport.getMarshallerFactory().getMarshaller(object);
@@ -112,6 +114,7 @@ public final class SamlUtils {
 
     /**
      * Returns the public key info for the given credential
+     *
      * @param credential the credential
      * @return the public key info
      */

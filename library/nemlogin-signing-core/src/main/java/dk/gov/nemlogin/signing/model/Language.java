@@ -27,13 +27,14 @@ public enum Language {
     public static Language valueOf(Locale locale) {
 
         if(locale != null){
-            switch (locale.getLanguage()){
-                case "da":
-                    return da;
-                case "en" :
+            switch (locale.getLanguage()) {
+                case "en" -> {
                     return en;
-                case "kl" :
+                }
+                case "kl" -> {
                     return kl;
+                }
+                default -> {return da;}
             }
         }
 

@@ -6,16 +6,22 @@ import dk.gov.nemlogin.signing.model.DataToBeSigned;
 import dk.gov.nemlogin.signing.model.FlowType;
 import dk.gov.nemlogin.signing.model.SignatureParameters;
 import dk.gov.nemlogin.signing.model.SignersDocument;
-import dk.gov.nemlogin.signing.model.SignersDocument.PlainTextSignersDocument;
 import dk.gov.nemlogin.signing.model.SignersDocument.HtmlSignersDocument;
 import dk.gov.nemlogin.signing.model.SignersDocument.PdfSignersDocument;
+import dk.gov.nemlogin.signing.model.SignersDocument.PlainTextSignersDocument;
 import dk.gov.nemlogin.signing.model.SignersDocument.XmlSignersDocument;
 import dk.gov.nemlogin.signing.model.SignersDocumentFile;
 import dk.gov.nemlogin.signing.model.SigningPayload;
 import dk.gov.nemlogin.signing.service.SigningPayloadService;
 import dk.gov.nemlogin.signing.service.TransformationContext;
 import dk.gov.nemlogin.signing.util.SigningUtils;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +32,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Test using the {@link SigningPayloadService} for
@@ -70,7 +75,9 @@ class SigningPayloadServiceTest extends AbstractSigningTest {
     }
 
 
-    /** Transform all generated SD to DTBS of type PDF using Service Provider flow */
+    /**
+     * Transform all generated SD to DTBS of type PDF using Service Provider flow
+     */
     @TestFactory
     @Order(2)
     Collection<DynamicTest> transformSdToPdfUsingSpFlow() throws IOException {
@@ -78,7 +85,9 @@ class SigningPayloadServiceTest extends AbstractSigningTest {
     }
 
 
-    /** Transform all generated SD to DTBS of type XML using Service Provider flow */
+    /**
+     * Transform all generated SD to DTBS of type XML using Service Provider flow
+     */
     @TestFactory
     @Order(3)
     Collection<DynamicTest> transformSdToXmlUsingSpFlow() throws IOException {
@@ -86,7 +95,9 @@ class SigningPayloadServiceTest extends AbstractSigningTest {
     }
 
 
-    /** Transform all generated SD to DTBS of type PDF using Service Provider flow */
+    /**
+     * Transform all generated SD to DTBS of type PDF using Service Provider flow
+     */
     @TestFactory
     @Order(4)
     Collection<DynamicTest> transformSdToPdfUsingBrokerFlow() throws IOException {
@@ -94,7 +105,9 @@ class SigningPayloadServiceTest extends AbstractSigningTest {
     }
 
 
-    /** Transform all generated SD to DTBS of type XML using Service Provider flow */
+    /**
+     * Transform all generated SD to DTBS of type XML using Service Provider flow
+     */
     @TestFactory
     @Order(5)
     Collection<DynamicTest> transformSdToXmlUsingBrokerFlow() throws IOException {
@@ -104,7 +117,8 @@ class SigningPayloadServiceTest extends AbstractSigningTest {
 
     /**
      * Transform all generated SD to DTBS of the given type for the given flow
-     * @param flowType the flow type
+     *
+     * @param flowType        the flow type
      * @param signatureFormat the signature format
      */
     private Collection<DynamicTest> transform(FlowType flowType, SignatureFormat signatureFormat) throws IOException {
@@ -113,14 +127,15 @@ class SigningPayloadServiceTest extends AbstractSigningTest {
             .map(file -> DynamicTest.dynamicTest(
                 String.format("transform_%s_%s", flowType, Objects.requireNonNull(file.getFileName().toString())),
                 () -> transform(file, flowType, signatureFormat)))
-            .collect(Collectors.toList());
+            .toList();
     }
 
 
     /**
      * Transform the SD to DTBS of the given type
-     * @param file the file to transform
-     * @param flowType the flow type
+     *
+     * @param file            the file to transform
+     * @param flowType        the flow type
      * @param signatureFormat the signature format
      */
     private void transform(Path file, FlowType flowType, SignatureFormat signatureFormat) throws IOException, NemLogInException {
@@ -130,23 +145,13 @@ class SigningPayloadServiceTest extends AbstractSigningTest {
         SignersDocumentFile sdf = SignersDocumentFile.builder()
             .setPath(file.toString())
             .build();
-        SignersDocument sd;
-        switch (extension) {
-            case ".pdf":
-                sd = new PdfSignersDocument(sdf);
-                break;
-            case ".txt":
-                sd = new PlainTextSignersDocument(sdf, false);
-                break;
-            case ".html":
-                sd = new HtmlSignersDocument(sdf);
-                break;
-            case ".xml":
-                sd = new XmlSignersDocument(sdf, getXslt(file));
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid Signer's Document type: " + fileName);
-        }
+        SignersDocument sd = switch (extension) {
+            case ".pdf" -> new PdfSignersDocument(sdf);
+            case ".txt" -> new PlainTextSignersDocument(sdf, false);
+            case ".html" -> new HtmlSignersDocument(sdf);
+            case ".xml" -> new XmlSignersDocument(sdf, getXslt(file));
+            default -> throw new IllegalArgumentException("Invalid Signer's Document type: " + fileName);
+        };
 
 
         String referenceText = flowType == FlowType.ServiceProvider ? "Signing " + fileName : null;
@@ -186,6 +191,7 @@ class SigningPayloadServiceTest extends AbstractSigningTest {
     /**
      * For XML files, look for a corresponding XSL file with the same file name but
      * or ".xsl" file extension
+     *
      * @param file the XML file name
      * @return the associated XSL
      */

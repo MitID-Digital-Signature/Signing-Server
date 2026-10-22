@@ -7,7 +7,6 @@ import org.apache.pdfbox.cos.COSName;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * This is used to validate fonts.
@@ -48,19 +47,19 @@ public class PdfFontValidator {
             .map(cosObject -> {
                 COSDictionary dict = (COSDictionary) cosObject.getObject();
                 var cosBase = dict.getDictionaryObject("Type");
-                if (cosBase instanceof COSName) {
-                    if ("Font".equals(((COSName) cosBase).getName())) {
+                if (cosBase instanceof COSName cosname){
+                    if ("Font".equals(cosname.getName())) {
                         if (dict.getDictionaryObject("FontDescriptor") == null) {
                             return PdfFontDescriptor.fromFont(cosObject, dict);
                         }
-                    } else if ("FontDescriptor".equals(((COSName) cosBase).getName())) {
+                    } else if ("FontDescriptor".equals(cosname.getName())) {
                         return PdfFontDescriptor.fromFontDescriptor(cosObject, dict);
                     }
                 }
                 return null;
             })
             .filter(Objects::nonNull)
-            .collect(Collectors.toList());
+            .toList();
     }
 
 
@@ -88,6 +87,6 @@ public class PdfFontValidator {
             .filter(font -> !font.isEmbedded() && !isStandardFont(font.getFontName()))
             .map(font -> new PdfValidationResult(font.getFontObject(), font.getFontName(),
                 font.getCosObject().getObjectNumber(), font.getCosObject().getGenerationNumber()))
-            .collect(Collectors.toList());
+            .toList();
     }
 }

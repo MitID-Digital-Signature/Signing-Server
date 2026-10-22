@@ -2,21 +2,27 @@ package dk.gov.nemlogin.signing.service;
 
 import dk.gov.nemlogin.signing.config.SigningConfigurationProperties;
 import dk.gov.nemlogin.signing.dto.SigningPayloadDTO;
+import dk.gov.nemlogin.signing.dto.SigningPayloadDTOAndIntegrityValues;
 import dk.gov.nemlogin.signing.exceptions.NemLogInException;
 import dk.gov.nemlogin.signing.format.SignatureFormat;
 import dk.gov.nemlogin.signing.model.DataToBeSigned;
 import dk.gov.nemlogin.signing.model.FlowType;
+import dk.gov.nemlogin.signing.model.IntegrityValues;
 import dk.gov.nemlogin.signing.model.Language;
 import dk.gov.nemlogin.signing.model.SignatureKeys;
 import dk.gov.nemlogin.signing.model.SignatureParameters;
 import dk.gov.nemlogin.signing.model.SignersDocument;
 import dk.gov.nemlogin.signing.util.SigningUtils;
+import jakarta.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,7 +47,6 @@ public class DocumentSigningService {
     private final String signingClientUrl;
     private final String entityID;
     private final MessageSource messageSource;
-
 
     /**
      * Constructor
@@ -71,13 +76,13 @@ public class DocumentSigningService {
 
 
     /**
-     * Generates a {@link SigningPayloadDTO} payload for the file to sign
+     * Generates a {@link SigningPayloadDTOAndIntegrityValues} payload for the file to sign
      *
      * @param signatureFormat the signature format
      * @param fileName        the file to sign
      * @return the signing payload
      */
-    public SigningPayloadDTO generateSigningPayload(SignatureFormat signatureFormat, String fileName) throws IOException {
+    public SigningPayloadDTOAndIntegrityValues generateSigningPayload(SignatureFormat signatureFormat, String fileName) throws IOException {
 
         SignersDocument sd = signersDocumentService.document(fileName);
 
@@ -105,17 +110,19 @@ public class DocumentSigningService {
 
         // Instantiate a transformation context
         TransformationContext ctx;
-        SigningPayloadDTO result;
+        SigningPayloadDTO signingPayload;
+        IntegrityValues integrityValues;
         try {
             ctx = new TransformationContext(sd, signatureKeys, signatureParameters, transformationProps);
+            signingPayload = signingPayloadService.produceSigningPayloadDTO(ctx);
+            integrityValues = ServiceLoaderFactory.getDocumentIntegrityService(ctx.getDataToBeSigned().getFormat()).createIntegrityValues(ctx);
 
-            result = signingPayloadService.produceSigningPayloadDTO(ctx);
         } catch (NemLogInException e) {
             throw new IOException(e);
         }
 
         if (LOG.isTraceEnabled()) {
-            LOG.trace("Computed Signing Payload {}", result);
+            LOG.trace("Computed Signing Payload {}", signingPayload);
         }
 
         // Used for debugging
@@ -134,6 +141,6 @@ public class DocumentSigningService {
             }
         }
 
-        return result;
+        return new SigningPayloadDTOAndIntegrityValues(signingPayload, integrityValues);
     }
 }

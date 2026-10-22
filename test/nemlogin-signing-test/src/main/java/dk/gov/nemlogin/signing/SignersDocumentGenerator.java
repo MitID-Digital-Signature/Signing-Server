@@ -3,15 +3,15 @@ package dk.gov.nemlogin.signing;
 import dk.gov.nemlogin.signing.exceptions.NemLogInException;
 import dk.gov.nemlogin.signing.service.impl.Abstract2PdfFormatTransformationService;
 import dk.gov.nemlogin.signing.util.SigningUtils;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.function.UnaryOperator;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
@@ -74,7 +73,7 @@ public class SignersDocumentGenerator {
             : DEFAULT_DOCUMENT_ROOT;
 
         List<String> kalliopeUrls = args.length > 1
-            ? Stream.of(args).skip(1).collect(Collectors.toList())
+            ? Stream.of(args).skip(1).toList()
             : DEFAULT_KALLIOPE_URLS;
 
         var testDataGenerator = new SignersDocumentGenerator(documentRoot, kalliopeUrls);
@@ -134,9 +133,9 @@ public class SignersDocumentGenerator {
 
         // Save in destination folder
         Path dir = getDocumentDir();
-        Files.write(dir.resolve(baseFileName + ".xml"), xml.getBytes(StandardCharsets.UTF_8));
-        Files.write(dir.resolve(baseFileName + ".html"), html.getBytes(StandardCharsets.UTF_8));
-        Files.write(dir.resolve(baseFileName + ".txt"), text.getBytes(StandardCharsets.UTF_8));
+        Files.writeString(dir.resolve(baseFileName + ".xml"), xml);
+        Files.writeString(dir.resolve(baseFileName + ".html"), html);
+        Files.writeString(dir.resolve(baseFileName + ".txt"), text);
 
         // Also save XSLT
         Files.write(dir.resolve(baseFileName + ".xsl"), resourceLoader

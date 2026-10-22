@@ -26,12 +26,12 @@ public class PdfWhitelistValidator {
     @SuppressWarnings("java:S3776")
     public List<PdfValidationResult> whitelistValidation(COSBase cosBase) {
         List<PdfValidationResult> res = new ArrayList<>();
-        if (cosBase instanceof COSName) {
-            if (!WhiteList.isNameWhitelisted((COSName) cosBase)) {
-                res.add(new PdfValidationResult(cosBase, (COSName) cosBase, objNum, generation));
+        if (cosBase instanceof COSName cosName) {
+            if (!WhiteList.isNameWhitelisted(cosName)) {
+                res.add(new PdfValidationResult(cosBase, cosName, objNum, generation));
             }
-        } else if (cosBase instanceof COSDictionary) {
-            ((COSDictionary) cosBase).entrySet().stream()
+        } else if (cosBase instanceof COSDictionary cosdictionary) {
+            cosdictionary.entrySet().stream()
                 .filter(cosNameCOSBaseEntry -> !WhiteList.isKeyExcluded(cosNameCOSBaseEntry.getKey()))
                 .forEach(cosNameCOSBaseEntry -> {
                     if (!WhiteList.isNameWhitelisted(cosNameCOSBaseEntry.getKey())) {
@@ -41,14 +41,13 @@ public class PdfWhitelistValidator {
                         res.addAll(whitelistValidation(cosNameCOSBaseEntry.getValue()));
                     }
                 });
-        } else if (cosBase instanceof COSArray) {
-            ((COSArray) cosBase).forEach(cosBase1 -> {
+        } else if (cosBase instanceof COSArray cosarray) {
+            cosarray.forEach(cosBase1 -> {
                 if (!(cosBase1 instanceof COSObject)) {
                     res.addAll(whitelistValidation(cosBase1));
                 }
             });
-        } else if (cosBase instanceof COSObject) {
-            var cosObject = ((COSObject) cosBase);
+        } else if (cosBase instanceof COSObject cosObject) {
             this.objNum = cosObject.getObjectNumber();
             this.generation = cosObject.getGenerationNumber();
             res.addAll(whitelistValidation(cosObject.getObject()));
